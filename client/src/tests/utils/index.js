@@ -1,5 +1,22 @@
 import { shallow, mount } from 'enzyme';
-import checkPropTypes from 'check-prop-types';
+import { routerMiddleware } from 'connected-react-router';
+import { createStore, applyMiddleware } from 'redux';
+import { createBrowserHistory } from 'history';
+import thunk from 'redux-thunk';
+import createRootReducer from '../../reducers/reducers.js';
+
+const history = createBrowserHistory();
+const middlewares = applyMiddleware(thunk, routerMiddleware(history));
+
+/**
+ * Create a testing store with imported reducers, initial state, and middleware(s).
+ * @function createStoreFactory
+ * @param {object} initialState - Initial store state.
+ * @returns {store} - redux store with
+ */
+export const createStoreFactory = initialState =>
+  createStore(createRootReducer(history), initialState, middlewares);
+
 
 /**
  * Factory function to create a ShallowWrapper for a component
@@ -17,7 +34,7 @@ export const shallowWrap = (Component, state = null) => {
 /**
  * Factory function to create a MountedWrapper for a component
  * @function mountWrap
- * @param {node} Component - Component to be shallowed
+ * @param {node} Component - Component to be mounted
  * @param {object} props - Component props specific to this setup.
  * @param {object} state - initial state for setup.
  * @returns {MountedWrapper}
@@ -26,19 +43,4 @@ export const mountWrap = (Component, state = null) => {
   const wrapper = mount(Component);
   if (state) wrapper.setState(state);
   return wrapper;
-};
-
-/**
- * Component PropType error checking
- * @param {node} Component - Component to be checked.
- * @param {conformingProps} object - Component props to be checked against.
- */
-export const checkProps = (Component, conformingProps) => {
-  const propError = checkPropTypes(
-    Component.propTypes,
-    conformingProps,
-    'prop',
-    Component.name,
-  );
-  expect(propError).toBeUndefined();
 };
