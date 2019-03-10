@@ -86,12 +86,12 @@ git clone git@github.com:mattcarlotta/fullstack-mern-kit.git
 
 | `yarn <command>` | Description                                                              |
 | ---------------- | ------------------------------------------------------------------------ |
-| `dev`            | Starts both servers (client: `localhost:3000`, api: `localhost:5000`).   |
-| `initialize`     | Installs dependencies for client and api servers.                        |
+| `dev`            | Starts both servers (client: `localhost:3000`, API: `localhost:5000`).   |
+| `initialize`     | Installs dependencies for client and API servers.                        |
 | `start`          | Starts a production server at `localhost:8080` (must run `build` first). |
 | `build`          | Compiles client application to a `client/dist` folder.                   |
 | `lint`           | Lints all `.js` files.                                                   |
-| `lint:back`      | Lint all of api's `.js` files.                                           |
+| `lint:back`      | Lint all of API's `.js` files.                                           |
 | `lint:front`     | Lint all of client's `.js` files.                                        |
 | `lint:styles`    | Lint all `.scss` files.                                                  |
 | `test:front`     | Runs and watches all `.test.js` files.                                   |
@@ -165,7 +165,7 @@ Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/cl
 - [Webpack](https://github.com/webpack/webpack)
 - [Webpack Dev Server (Hot Loaded)](https://github.com/webpack/webpack-dev-server)
 
-### Server
+### API
 
 Click here <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/package.json#L67-L90">here</a> to see latest versions.
 
