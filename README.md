@@ -127,7 +127,7 @@ git clone git@github.com:mattcarlotta/fullstack-mern-kit.git
 
 ## Packages Incorporated
 
-These packages are updated by an automated script that can be found <a href="https://github.com/mattcarlotta/UpdateBoilerplate">here</a>. If you run into any issues, please fill out an issue report <a href="https://github.com/mattcarlotta/fullstack-mern-kit/issues">here</a>.
+If you run into any issues, please fill out an issue report <a href="https://github.com/mattcarlotta/fullstack-mern-kit/issues">here</a>.
 
 ### Client
 
