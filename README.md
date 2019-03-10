@@ -1,8 +1,6 @@
-## Webpack FullStack Boilerplate
+## FullStack M.E.R.N. Kit
 
-![cvU2GRX.png](https://i.imgur.com/cvU2GRX.png)
-
-Note: This a M.E.R.N. (Mongo, Express, React, NodeJS) fullstack boilerplate! A React only boilerplate can be found on the <a href="https://github.com/mattcarlotta/Webpack-React-Boilerplate/tree/master">master</a> branch, a React Hot Loaded boilerplate can be found on the <a href="https://github.com/mattcarlotta/Webpack-React-Boilerplate/tree/hotloaded">hotloaded</a> branch, or a React SSR boilerplate can be found on the <a href="https://github.com/mattcarlotta/Webpack-React-Boilerplate/tree/ssr">ssr</a> branch.
+![ykSjcK2.png](https://i.imgur.com/ykSjcK2.png)
 
 ## Table of contents
 
@@ -14,13 +12,15 @@ Note: This a M.E.R.N. (Mongo, Express, React, NodeJS) fullstack boilerplate! A R
 
 [Client Configuration](#client-configuration)
 
+[API Configuration](#api-configuration)
+
 [Packages Incorporated](#packages-incorporated)
 
 ## Project Structure
 
 ```
 ├── client
-|   ├── build
+|   ├── dist
 |   |   ├── css
 |   |   |   ├── main.[contenthash:8].css
 |   |   |   └── main.[contenthash:8].css.map
@@ -33,12 +33,13 @@ Note: This a M.E.R.N. (Mongo, Express, React, NodeJS) fullstack boilerplate! A R
 |   |   └── index.html
 |   |
 |   ├── config
+|   |   ├── devServer.js
 |   |   ├── envs.js
+|   |   ├── optimization.js
+|   |   ├── output.js
 |   |   ├── paths.js
-|   |   ├── rules.js
-|   |   ├── webpack.common.js
-|   |   ├── webpack.dev.js
-|   |   └── webpack.prod.js
+|   |   ├── plugins.js
+|   |   └── rules.js
 |   |
 |   ├── public
 |   |   ├── favicon.ico
@@ -55,82 +56,92 @@ Note: This a M.E.R.N. (Mongo, Express, React, NodeJS) fullstack boilerplate! A R
 |   |   ├── styles
 |   |   ├── tests
 |   |   ├── types
-|   |   ├── index.js
-|   |   └── setupTests.js
+|   |   └── index.js
 |   |
 |   └── webpack.config.js
 |
 ├── controllers
 ├── database
-├── env
 ├── middlewares
 ├── models
 ├── routes
 ├── server
-├── services
 ├── shared
 └── app.js
 ```
 
 ## Installation
 
-1 - Clone the boilerplate `fullstack` repository.
+1 - Clone the repository.
 
 ```
- git clone -b fullstack git@github.com:mattcarlotta/Webpack-React-Boilerplate.git
+git clone git@github.com:mattcarlotta/fullstack-mern-kit.git
 ```
 
-2 - Run `npm i && cd client && npm i` to install dependencies.
+2 - Run `yarn initialize` to install dependencies.
 
-3 - Globally or locally install `nodemon` for handling and updating the application for file changes:
-
-Locally (while at the application's root directory): `npm i -D nodemon`
-
-Globally: `sudo npm i -g nodemon`
-
-4 - While at the application's root directory, start both servers by running `npm run dev`.
+3 - While at the application's root directory, start both servers by running `yarn dev`.
 
 ## Commands
 
-To prettify and lint your .js/.scss files, run `npm run lint` while at the application's root directory.
-
-To run your tests, while inside the client's root directory, run `npm run test`. Testing will watch all your changes in the `.test.js` files as well as create a `coverage` folder. To view the current coverage report, navigate to `coverage/Icov-report/src` and open `index.html` in a browser. Please note that `*.test.js` files will be ignored by ESlint. To find out why, please see <a href="https://github.com/mattcarlotta/Webpack-React-Boilerplate/blob/fullstack/client/src/setupTests.js">setupTest.js</a> for more information.
-
-To build and bundle your client resources for staging, while inside the client's root directory, use `npm run staging` (staging utilizes source maps for errors). After you have built your React application for staging, use `npm start` while at the application's root directory. You should now see your React application running on `http://localhost:5000`.
-
-To build and bundle your client resources for production, while inside the client's root directory, use `npm run build` (source maps will be excluded). After you have built your React application for production, use `npm start` while at the application's root directory. You should now see your React application running on `http://localhost:5000`.
+| `yarn <command>` | Description                                                              |
+| ---------------- | ------------------------------------------------------------------------ |
+| `dev`            | Starts both servers (client: `localhost:3000`, api: `localhost:5000`.    |
+| `initialize`     | Installs dependencies for client and api servers.                        |
+| `start`          | Starts a production server at `localhost:8080` (must run `build` first). |
+| `build`          | Compiles client application to a `client/dist` folder.                   |
+| `lint`           | Lints all `.js` files.                                                   |
+| `lint:back`      | Lint all of api's `.js` files.                                           |
+| `lint:front`     | Lint all of client's `.js` files.                                        |
+| `lint:styles`    | Lint all `.scss` files.                                                  |
+| `test:front`     | Runs and watches all `.test.js` files.                                   |
+| `test:back`      | Runs and watches all `.test.js` files. (not hooked up)                   |
 
 ## Client Configuration
 
-- `client/config/envs.js` webpack environment variables.
-- `client/config/paths.js` webpack config folder paths.
-- `client/config/rules.js` webpack rules functions.
-- `client/config/webpack.common.js` common webpack config for both development and production environments.
-- `client/config/webpack.dev.js` webpack config for development environment only.
-- `client/config/webpack.prod.js` webpack config for production environment only.
-- `client/webpack.config.js` main webpack config that merges common and an environment based config
-- `client/src/setupTest.js` enzyme test setup for your React components.
+- `client/src/config/devServer.js` webpack devServer options.
+- `client/src/config/envs.js` webpack environment variables.
+- `client/src/config/optimization.js` webpack optimization options.
+- `client/src/config/output.js` webpack output options.
+- `client/src/config/paths.js` webpack config folder paths.
+- `client/src/config/plugins.js` webpack plugins options.
+- `client/src/config/rules.js` webpack rules functions.
+- `client/webpack.config.js` a single webpack environment based config.
+- `client/src/client/tests/setup/setupTest.js` enzyme test setup for your React components.
 - `client/.babelrc` babel config for react js files.
 - `client/.browserslistrc` browsers list config.
 - `client/.eslintignore` eslint config for ignoring scss files.
 - `client/.eslintrc` eslint config for linting js files.
 - `client/.prettierc` prettier config.
 - `client/.stylelintrc.json` stylelint config for linting scss files.
+- `client/jest.json` jest config.
+
+## API Configuration
+
+- `database/setup.js` mongoose connection to local mongodb.
+- `middlewares/middlewares.js` express middlewares.
+- `models/users.js` mongoose model for a local mongodb.
+- `server/server.js` express configuration.
+- `shared` miscellaneous helpers.
+- `app.js` API initialization configuration (click <a href="https://github.com/jarradseers/consign#consign">here</a> to see how `consign` works)
 
 ## Packages Incorporated
 
-These packages are updated by an automated script that can be found <a href="https://github.com/mattcarlotta/UpdateBoilerplate">here</a>. To see the latest package versions, please check out the <a href="https://github.com/mattcarlotta/Webpack-React-Boilerplate/blob/fullstack/package.json">package.json</a>. If you run into any issues, please fill out an issue report <a href="https://github.com/mattcarlotta/Webpack-React-Boilerplate/issues">here</a>.
+These packages are updated by an automated script that can be found <a href="https://github.com/mattcarlotta/UpdateBoilerplate">here</a>. If you run into any issues, please fill out an issue report <a href="https://github.com/mattcarlotta/fullstack-mern-kit/issues">here</a>.
 
 ### Client
 
+Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/client/package.json#L77-L162">here</a> to see latest versions.
+
 - [Axios](https://github.com/axios/axios)
 - [Babel](https://github.com/babel/babel)
-- [CSS Loader](https://github.com/webpack-contrib/css-loader)
 - [Browsers List](https://github.com/browserslist/browserslist)
 - [Connected React Router](https://github.com/supasate/connected-react-router)
-- [Eslint](https://github.com/eslint/eslint/)
+- [CSS Loader](https://github.com/webpack-contrib/css-loader)
 - [Enzyme](http://airbnb.io/enzyme/)
 - [Error Overlay Webpack Plugin](https://github.com/smooth-code/error-overlay-webpack-plugin)
+- [Eslint](https://github.com/eslint/eslint/)
+- [Friendly Errors Webpack Plugin](https://github.com/geowarin/friendly-errors-webpack-plugin)
 - [History](https://github.com/ReactTraining/history)
 - [Husky](https://github.com/typicode/husky)
 - [Jest](https://github.com/facebook/jest)
@@ -141,21 +152,22 @@ These packages are updated by an automated script that can be found <a href="htt
 - [React Router Dom](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-dom)
 - [Redux](https://github.com/reduxjs/redux)
 - [Redux Thunk](https://github.com/reduxjs/redux-thunk)
-- [Redux Form](https://redux-form.com/)
 - [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension)
-- [Sass Loader](https://github.com/webpack-contrib/sass-loader)
+- [Redux Form](https://redux-form.com/)
+- [Redux Thunk](https://github.com/reduxjs/redux-thunk)
 - [Stylelint](https://stylelint.io/)
 - [Stylelint-SCSS](https://github.com/kristerkari/stylelint-scss)
 - [Stylelint-Config-Recommended](https://github.com/stylelint/stylelint-config-recommended)
-- [Style Loader](https://github.com/webpack-contrib/style-loader)
 - [Stylized Components](https://github.com/styled-components/styled-components)
-- [Stylized Theming](https://github.com/styled-components/styled-theming)
-- [Friendly Errors Webpack Plugin](https://github.com/geowarin/friendly-errors-webpack-plugin)
+- [Sass Loader](https://github.com/webpack-contrib/sass-loader)
+- [Style Loader](https://github.com/webpack-contrib/style-loader)
 - [UglifyJS Webpack Plugin](https://www.npmjs.com/package/uglifyjs-webpack-plugin)
 - [Webpack](https://github.com/webpack/webpack)
 - [Webpack Dev Server (Hot Loaded)](https://github.com/webpack/webpack-dev-server)
 
 ### Server
+
+Click here <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/package.json#L67-L90">here</a> to see latest versions.
 
 - [Bcrypt](https://github.com/kelektiv/node.bcrypt.js)
 - [Bluebird](https://github.com/petkaantonov/bluebird)

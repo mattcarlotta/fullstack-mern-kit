@@ -1,12 +1,15 @@
 import { shallow, mount } from 'enzyme';
-import { routerMiddleware } from 'connected-react-router';
-import { createStore, applyMiddleware } from 'redux';
-import { createBrowserHistory } from 'history';
 import thunk from 'redux-thunk';
-import createRootReducer from '../../reducers/reducers.js';
+import { createBrowserHistory } from 'history';
+import { createStore, applyMiddleware } from 'redux';
+import rootReducer from '../../reducers';
 
 const history = createBrowserHistory();
-const middlewares = applyMiddleware(thunk, routerMiddleware(history));
+const middlewares = applyMiddleware(thunk);
+
+//= =============================================================================//
+// CUSTOM TESTING FUNCTIONS                                                       /
+//= =============================================================================//
 
 /**
  * Create a testing store with imported reducers, initial state, and middleware(s).
@@ -15,8 +18,7 @@ const middlewares = applyMiddleware(thunk, routerMiddleware(history));
  * @returns {store} - redux store with
  */
 export const createStoreFactory = initialState =>
-  createStore(createRootReducer(history), initialState, middlewares);
-
+  createStore(rootReducer(history), initialState, middlewares);
 
 /**
  * Factory function to create a ShallowWrapper for a component

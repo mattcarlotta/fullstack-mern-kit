@@ -1,9 +1,10 @@
 import { JSDOM } from 'jsdom';
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { mountWrap, shallowWrap } from './tests/utils';
+import { createStoreFactory, mountWrap, shallowWrap } from '../utils';
 
 configure({ adapter: new Adapter() });
+
 /*
 THE BELOW ARE ACCESSIBLE AND PREDEFINED FOR ALL *.TEST.JS FILES
 WARNING: Due to the below being accessible to the global DOM,
@@ -19,6 +20,7 @@ global.document = document;
 global.window = document.defaultView;
 global.HTMLElement = window.HTMLElement;
 global.HTMLAnchorElement = window.HTMLAnchorElement;
+global.createStoreFactory = createStoreFactory;
 global.shallow = shallowWrap;
 global.mount = mountWrap;
 global.React = require('react');

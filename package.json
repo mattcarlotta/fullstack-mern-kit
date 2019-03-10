@@ -1,17 +1,57 @@
 {
-  "name": "server",
+  "name": "mern-starter-kit",
   "version": "1.0.0",
   "main": "app.js",
+  "description": "A fullstack MERN boilerplate.",
+  "repository": "https://github.com/mattcarlotta/fullstack-mern-kit",
+  "author": "Matt Carlotta",
+  "license": "MIT",
+  "private": false,
+  "engines": {
+    "node": ">=8",
+    "npm": ">=3"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "NODE_ENV=production node app.js",
-    "server": "NODE_ENV=development nodemon app.js",
+    "dev": "better-npm-run dev",
+    "initialize": "yarn install && cd client && yarn install && cd ..",
+    "start": "better-npm-run start",
+    "server": "better-npm-run server",
     "client": "npm run dev --prefix client",
-    "lint-front": "npm run pre-commit --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "seeds": "NODE_ENV=development node seeds.js",
+    "build": "npm run build --prefix client",
     "lint": "npm run lint-front --silent && npm run lint-back --silent",
-    "lint-back": "lint-staged"
+    "lint:front": "npm run pre-commit --prefix client",
+    "lint:back": "lint-staged",
+    "test:front": "npm run test --prefix client",
+    "test:back": "echo \"Error: no test specified\" && exit 1"
+  },
+  "betterScripts": {
+    "dev": {
+      "command": "concurrently \"npm run server\" \"npm run client\"",
+      "env": {
+        "HOST": "http://localhost:",
+        "client": "http://localhost:3000",
+        "database": "mongodb://localhost/boilerplate-dev-db",
+        "NODE_ENV": "development",
+        "PORT": 5000
+      }
+    },
+    "start": {
+      "command": "node app.js",
+      "env": {
+        "HOST": "http://localhost:",
+        "client": "http://example.com",
+        "database": "mongodb://localhost/boilerplate-prod-db",
+        "NODE_ENV": "production",
+        "PORT": 8080
+      }
+    },
+    "server": {
+      "command": "nodemon app.js",
+      "env": {
+        "NODE_ENV": "development",
+        "PORT": 5000
+      }
+    }
   },
   "lint-staged": {
     "*.js": [
@@ -19,14 +59,13 @@
       "eslint --fix"
     ]
   },
-  "nodemonConfig": {
-    "ignore": [
-      "client"
-    ]
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint:front --silent && npm run lint:back --silent"
+    }
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
+    "better-npm-run": "^0.1.1",
     "bluebird": "^3.5.3",
     "body-parser": "^1.18.3",
     "concurrently": "^4.1.0",
@@ -37,7 +76,8 @@
     "mongoose": "^5.4.15",
     "morgan": "^1.9.1",
     "passport": "^0.4.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "react-dev-utils": "^8.0.0"
   },
   "devDependencies": {
     "eslint": "^5.14.1",
@@ -47,11 +87,5 @@
     "lint-staged": "^8.1.4",
     "nodemon": "^1.18.10",
     "prettier": "^1.16.4"
-  },
-  "description": "",
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint-front --silent && npm run lint-back --silent"
-    }
   }
 }
