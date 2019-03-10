@@ -414,6 +414,7 @@
       logoContainer: 'logoContainer___1RNgP',
       app: 'app___JTQhs',
       logoStyle: 'logoStyle___6Ppma',
+      title: 'title___pIF7_',
       flipIn: 'flipIn___2h-J7',
     };
   },

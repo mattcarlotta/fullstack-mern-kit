@@ -119,9 +119,9 @@ git clone git@github.com:mattcarlotta/fullstack-mern-kit.git
 ## API Configuration
 
 - `database/setup.js` mongoose connection to local mongodb.
-- `middlewares/middlewares.js` express middlewares.
+- `middlewares` express middlewares.
 - `models/users.js` mongoose model for a local mongodb.
-- `server/server.js` express configuration.
+- `server` express configuration.
 - `shared` miscellaneous helpers.
 - `app.js` API initialization configuration (click <a href="https://github.com/jarradseers/consign#consign">here</a> to see how `consign` works)
 
