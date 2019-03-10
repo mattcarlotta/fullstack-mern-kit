@@ -86,7 +86,7 @@ git clone git@github.com:mattcarlotta/fullstack-mern-kit.git
 
 | `yarn <command>` | Description                                                              |
 | ---------------- | ------------------------------------------------------------------------ |
-| `dev`            | Starts both servers (client: `localhost:3000`, api: `localhost:5000`.    |
+| `dev`            | Starts both servers (client: `localhost:3000`, api: `localhost:5000`).   |
 | `initialize`     | Installs dependencies for client and api servers.                        |
 | `start`          | Starts a production server at `localhost:8080` (must run `build` first). |
 | `build`          | Compiles client application to a `client/dist` folder.                   |
