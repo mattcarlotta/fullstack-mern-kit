@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import Home from '../components/Home/Home.js';
-import NotFound from '../components/NotFound/NotFound.js';
+import Home from '../components/Home';
+import NotFound from '../components/NotFound';
 
 export default () => (
   <div>

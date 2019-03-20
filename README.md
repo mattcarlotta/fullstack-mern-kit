@@ -18,7 +18,9 @@
 
 ## Project Structure
 
-```
+<details>
+<summary>Click to expand project structure</summary>
+<pre><code>
 ├── client
 |   ├── dist
 |   |   ├── css
@@ -68,7 +70,9 @@
 ├── server
 ├── shared
 └── app.js
-```
+</code></pre>
+</details>
+<br />
 
 ## Installation
 
@@ -99,31 +103,49 @@ git clone git@github.com:mattcarlotta/fullstack-mern-kit.git
 
 ## Client Configuration
 
-- `client/src/config/devServer.js` webpack devServer options.
-- `client/src/config/envs.js` webpack environment variables.
-- `client/src/config/optimization.js` webpack optimization options.
-- `client/src/config/output.js` webpack output options.
-- `client/src/config/paths.js` webpack config folder paths.
-- `client/src/config/plugins.js` webpack plugins options.
-- `client/src/config/rules.js` webpack rules functions.
-- `client/webpack.config.js` a single webpack environment based config.
-- `client/src/client/tests/setup/setupTest.js` enzyme test setup for your React components.
-- `client/.babelrc` babel config for react js files.
-- `client/.browserslistrc` browsers list config.
-- `client/.eslintignore` eslint config for ignoring scss files.
-- `client/.eslintrc` eslint config for linting js files.
-- `client/.prettierc` prettier config.
-- `client/.stylelintrc.json` stylelint config for linting scss files.
-- `client/jest.json` jest config.
+<details>
+<summary>Click to expand client configuration</summary>
+<pre><code>
+- client/src/config/devServer.js: webpack devServer options.
+- client/src/config/envs.js: webpack environment variables.
+- client/src/config/optimization.js: webpack optimization options.
+- client/src/config/output.js: webpack output options.
+- client/src/config/paths.js: webpack config folder paths.
+- client/src/config/plugins.js: webpack plugins options.
+- client/src/config/rules.js: webpack rules functions.
+- client/webpack.config.js: a single webpack environment based config.
+- client/src/client/tests/setup/setupTest.js: enzyme test setup for your React components.
+- client/src/tests/setup/setupTest.js: enzyme test setup for your React components.
+- client/src/styles/assets: media assets imports.
+- client/src/styles/extensions: partial shared extensions.
+- client/src/styles/globals: global asset imports (see notes in <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/client/src/styles/globals/globals.scss#L1-L32">global.scss</a> for important information).
+- client/src/styles/variables: partial shared variables.
+- client/src/styles/styles.scss: indexed partial files for easier sharing (see notes in <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/client/src/styles/styles.scss#L1-L48">styles.scss</a> for important information).
+- client/.babelrc: babel config for react js files.
+- client/.browserslistrc: browsers list config.
+- client/.eslintignore: eslint config for ignoring scss files.
+- client/.eslintrc: eslint config for linting js files.
+- client/.prettierc: prettier config.
+- client/.stylelintrc.json: stylelint config for linting scss files.
+- client/jest.json: jest config.
+</code></pre>
+</details>
+<br />
 
 ## API Configuration
 
-- `database/setup.js` mongoose connection to local mongodb.
-- `middlewares` express middlewares.
-- `models/users.js` mongoose model for a local mongodb.
-- `server` express configuration.
-- `shared` miscellaneous helpers.
-- `app.js` API initialization configuration (click <a href="https://github.com/jarradseers/consign#consign">here</a> to see how `consign` works)
+<details>
+<summary>Click to expand API configuration</summary>
+<pre><code>
+- database/setup.js: mongoose connection to local mongodb.
+- middlewares: express middlewares.
+- models/users.js: mongoose model for a local mongodb.
+- server: express configuration.
+- shared: miscellaneous helpers.
+- app.js: API initialization configuration (click <a href="https://github.com/jarradseers/consign#consign">here</a> to see how `consign` works)
+</code></pre>
+</details>
+<br />
 
 ## Packages Incorporated
 
@@ -133,52 +155,64 @@ If you run into any issues, please fill out an issue report <a href="https://git
 
 Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/client/package.json#L77-L162">here</a> to see latest versions.
 
-- [Axios](https://github.com/axios/axios)
-- [Babel](https://github.com/babel/babel)
-- [Browsers List](https://github.com/browserslist/browserslist)
-- [Connected React Router](https://github.com/supasate/connected-react-router)
-- [CSS Loader](https://github.com/webpack-contrib/css-loader)
-- [Enzyme](http://airbnb.io/enzyme/)
-- [Error Overlay Webpack Plugin](https://github.com/smooth-code/error-overlay-webpack-plugin)
-- [Eslint](https://github.com/eslint/eslint/)
-- [Friendly Errors Webpack Plugin](https://github.com/geowarin/friendly-errors-webpack-plugin)
-- [History](https://github.com/ReactTraining/history)
-- [Husky](https://github.com/typicode/husky)
-- [Jest](https://github.com/facebook/jest)
-- [Lodash](https://github.com/lodash/lodash)
-- [Mini CSS Extract Plugin](https://github.com/webpack-contrib/mini-css-extract-plugin)
-- [Prettier](https://github.com/prettier/prettier)
-- [React](https://github.com/facebook/react)
-- [React Router Dom](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-dom)
-- [Redux](https://github.com/reduxjs/redux)
-- [Redux Thunk](https://github.com/reduxjs/redux-thunk)
-- [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension)
-- [Redux Form](https://redux-form.com/)
-- [Redux Thunk](https://github.com/reduxjs/redux-thunk)
-- [Stylelint](https://stylelint.io/)
-- [Stylelint-SCSS](https://github.com/kristerkari/stylelint-scss)
-- [Stylelint-Config-Recommended](https://github.com/stylelint/stylelint-config-recommended)
-- [Stylized Components](https://github.com/styled-components/styled-components)
-- [Sass Loader](https://github.com/webpack-contrib/sass-loader)
-- [Style Loader](https://github.com/webpack-contrib/style-loader)
-- [UglifyJS Webpack Plugin](https://www.npmjs.com/package/uglifyjs-webpack-plugin)
-- [Webpack](https://github.com/webpack/webpack)
-- [Webpack Dev Server (Hot Loaded)](https://github.com/webpack/webpack-dev-server)
+<details>
+<summary>Click to expand brief overview of client packages</summary>
+<pre><code>
+- <a href="https://github.com/axios/axios">Axios</a>
+- <a href="https://github.com/babel/babel">Babel</a>
+- <a href="https://github.com/webpack-contrib/css-loader">CSS Loader</a>
+- <a href="https://github.com/supasate/connected-react-router">Connected React Router</a>
+- <a href="https://github.com/eslint/eslint/">Eslint</a>
+- <a href="http://airbnb.io/enzyme/">Enzyme</a>
+- <a href="https://github.com/smooth-code/error-overlay-webpack-plugin">Error Overlay Webpack Plugin</a>
+- <a href="https://github.com/expressjs/express">Express</a>
+- <a href="https://github.com/geowarin/friendly-errors-webpack-plugin">Friendly Errors Webpack Plugin</a>
+- <a href="https://github.com/ReactTraining/history">History</a>
+- <a href="https://github.com/typicode/husky">Husky</a>
+- <a href="https://github.com/facebook/jest">Jest</a>
+- <a href="https://github.com/lodash/lodash">Lodash</a>
+- <a href="https://github.com/webpack-contrib/mini-css-extract-plugin">Mini CSS Extract Plugin</a>
+- <a href="https://github.com/expressjs/morgan">Morgan</a>
+- <a href="https://github.com/prettier/prettier">Prettier</a>
+- <a href="https://github.com/facebook/prop-types">PropTypes</a>
+- <a href="https://github.com/facebook/react">React</a>
+- <a href="https://github.com/ReactTraining/react-router/tree/master/packages/react-router-dom">React Router Dom</a>
+- <a href="https://github.com/reduxjs/redux">Redux</a>
+- <a href="https://github.com/zalmoxisus/redux-devtools-extension">Redux DevTools Extension</a>
+- <a href="https://redux-form.com/">Redux Form</a>
+- <a href="https://github.com/reduxjs/redux-thunk">Redux Thunk</a>
+- <a href="https://github.com/webpack-contrib/sass-loader">Sass Loader</a>
+- <a href="https://stylelint.io/">Stylelint</a>
+- <a href="https://github.com/kristerkari/stylelint-scss">Stylelint-SCSS</a>
+- <a href="https://github.com/stylelint/stylelint-config-recommended">Stylelint-Config-Recommended</a>
+- <a href="https://github.com/styled-components/styled-components">Stylized Components</a>
+- <a href="https://github.com/webpack-contrib/style-loader">Style Loader</a>
+- <a href="https://github.com/webpack/webpack">Webpack</a>
+- <a href="https://www.npmjs.com/package/webpackbar">Webpackbar</a>
+- <a href="https://github.com/webpack/webpack-dev-server">Webpack Dev Server (Hot Loaded)</a>
+</code></pre>
+</details>
+<br />
 
 ### API
 
 Click here <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/package.json#L67-L90">here</a> to see latest versions.
 
-- [Bcrypt](https://github.com/kelektiv/node.bcrypt.js)
-- [Bluebird](https://github.com/petkaantonov/bluebird)
-- [Body Parser](https://github.com/expressjs/body-parser)
-- [Concurrently](https://github.com/kimmobrunfeldt/concurrently)
-- [Consign](https://github.com/jarradseers/consign)
-- [CORS](https://github.com/expressjs/cors)
-- [Express](http://expressjs.com/)
-- [Moment](http://momentjs.com/)
-- [Mongoose](https://mongoosejs.com/)
-- [Morgan](https://github.com/expressjs/morgan)
-- [Passport](http://www.passportjs.org/)
-- [Passport Local](https://github.com/jaredhanson/passport-local)
-- [Prettier](https://github.com/prettier/prettier)
+<details>
+<summary>Click to expand brief overview of API packages</summary>
+<pre><code>
+- <a href="https://github.com/petkaantonov/bluebird">Bluebird</a>
+- <a href="https://github.com/expressjs/body-parser">Body Parser</a>
+- <a href="https://github.com/kimmobrunfeldt/concurrently">Concurrently</a>
+- <a href="https://github.com/jarradseers/consign">Consign</a>
+- <a href="https://github.com/expressjs/cors">CORS</a>
+- <a href="http://expressjs.com/">Express</a>
+- <a href="http://momentjs.com/">Moment</a>
+- <a href="https://mongoosejs.com/">Mongoose</a>
+- <a href="https://github.com/expressjs/morgan">Morgan</a>
+- <a href="http://www.passportjs.org/">Passport</a>
+- <a href="https://github.com/jaredhanson/passport-local">Passport Local</a>
+- <a href="https://github.com/prettier/prettier">Prettier</a>
+</code></pre>
+</details>
+<br />
