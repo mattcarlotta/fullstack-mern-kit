@@ -1,6 +1,6 @@
 ## FullStack M.E.R.N. Kit
 
-![ykSjcK2.png](https://i.imgur.com/ykSjcK2.png)
+![W9ttzGE.png](https://i.imgur.com/W9ttzGE.png)
 
 ## Table of contents
 
