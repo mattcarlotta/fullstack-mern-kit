@@ -1,8 +1,8 @@
 import React from 'react';
-import logo from '../../images/mernLogo.png';
+import logo from 'images/mernLogo.png';
 import { app, logoContainer, logoStyle, title } from './styles.scss';
 
-export default () => (
+const Home = () => (
   <div className={app}>
     <div className={logoContainer}>
       <img className={logoStyle} src={logo} alt="" />
@@ -11,3 +11,5 @@ export default () => (
     </div>
   </div>
 );
+
+export default Home;

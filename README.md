@@ -51,6 +51,7 @@
 |   |   ├── components
 |   |   ├── containers
 |   |   ├── images
+|   |   ├── pages
 |   |   ├── reducers
 |   |   ├── root
 |   |   ├── routes
@@ -153,7 +154,7 @@ If you run into any issues, please fill out an issue report <a href="https://git
 
 ### Client
 
-Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/client/package.json#L77-L162">here</a> to see latest versions.
+Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/client/package.json#L77-L165">here</a> to see latest versions.
 
 <details>
 <summary>Click to expand brief overview of client packages</summary>
