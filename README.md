@@ -59,8 +59,8 @@
 |   |   ├── routes
 |   |   ├── store
 |   |   ├── styles
-|   |   ├── tests
 |   |   ├── types
+|   |   ├── utils
 |   |   └── index.js
 |   |
 |   └── webpack.config.js
@@ -127,12 +127,15 @@ If you wish to utilize the API:
 - client/src/config/rules.js: webpack rules functions.
 - client/webpack.config.js: a single webpack environment based config.
 - client/src/client/tests/setup/setupTest.js: enzyme test setup for your React components.
-- client/src/tests/setup/setupTest.js: enzyme test setup for your React components.
 - client/src/styles/assets: media assets imports.
 - client/src/styles/extensions: partial shared extensions.
 - client/src/styles/globals: global asset imports (see notes in <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/client/src/styles/globals/globals.scss#L1-L32">global.scss</a> for important information).
 - client/src/styles/variables: partial shared variables.
 - client/src/styles/styles.scss: indexed partial files for easier sharing (see notes in <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/client/src/styles/styles.scss#L1-L48">styles.scss</a> for important information).
+- client/src/utils/__mocks__/mockAxios.js: a mocked axios instance for testing.
+- client/src/utils/setup/setupTest.js: enzyme test setup for your React components.
+- client/src/utils/axiosConfig.js: custom axios configuration.
+- client/src/utils/index.js: custom test functions.
 - client/.babelrc: babel config for react js files.
 - client/.browserslistrc: browsers list config.
 - client/.eslintignore: eslint config for ignoring scss files.
