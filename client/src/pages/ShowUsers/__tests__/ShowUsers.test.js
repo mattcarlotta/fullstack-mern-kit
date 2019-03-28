@@ -34,10 +34,6 @@ describe('Show Users Page', () => {
     wrapper = mountComponent({ ...initialProps });
   });
 
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
   it('renders', () => {
     expect(wrapper.find('div.usersContainer')).toHaveLength(1);
   });
@@ -102,11 +98,6 @@ describe('Show Users Page', () => {
         .instance()
         .setState({ data, isLoading: false });
       wrapper.update();
-      jest.useFakeTimers();
-    });
-
-    afterEach(() => {
-      jest.runAllTimers();
     });
 
     it('displays a user list', () => {
