@@ -16,16 +16,16 @@ export class PopMessage extends Component {
     this.props.setPopMessage('Welcome to the FullStack M.E.R.N. Kit!');
   };
 
+  componentDidUpdate = () => {
+    if (this.props.serverError || this.props.serverMessage)
+      this.setMessageTimer();
+  };
+
   shouldComponentUpdate = nextProps =>
     this.props.serverError !== '' ||
     nextProps.serverError !== '' ||
     this.props.serverMessage !== '' ||
     nextProps.serverMessage !== '';
-
-  componentDidUpdate = () => {
-    if (this.props.serverError || this.props.serverMessage)
-      this.setMessageTimer();
-  };
 
   setMessageTimer = () => (this.timeout = setTimeout(this.handleClose, 3500));
 

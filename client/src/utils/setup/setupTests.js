@@ -1,7 +1,8 @@
 import { JSDOM } from 'jsdom';
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { createStoreFactory, mountWrap, shallowWrap } from '../utils';
+import { createStoreFactory, mountWrap, shallowWrap } from 'utils';
+import mockAxios from 'utils/__mocks__/mockAxios.js';
 
 configure({ adapter: new Adapter() });
 
@@ -23,6 +24,7 @@ global.HTMLAnchorElement = window.HTMLAnchorElement;
 global.createStoreFactory = createStoreFactory;
 global.shallow = shallowWrap;
 global.mount = mountWrap;
+global.mockAxios = mockAxios;
 global.React = require('react');
 global.Provider = require('react-redux').Provider;
 global.ConnectedRouter = require('connected-react-router').ConnectedRouter;

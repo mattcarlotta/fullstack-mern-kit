@@ -14,7 +14,6 @@
   "scripts": {
     "dev": "better-npm-run dev",
     "initialize": "yarn install",
-    "start": "better-npm-run start",
     "build": "better-npm-run build",
     "test": "better-npm-run test",
     "test:coverage": "better-npm-run test:coverage",
@@ -27,21 +26,15 @@
     "dev": {
       "command": "webpack-dev-server",
       "env": {
+        "APIPORT": 5000,
         "NODE_ENV": "development",
         "PORT": 3000
-      }
-    },
-    "start": {
-      "command": "node server.js",
-      "env": {
-        "HOST": "http://localhost:",
-        "NODE_ENV": "production",
-        "PORT": 8080
       }
     },
     "build": {
       "command": "webpack",
       "env": {
+        "APIPORT": 8080,
         "NODE_ENV": "production"
       }
     },
@@ -83,6 +76,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
+    "react-helmet": "^5.2.0",
     "react-redux": "^6.0.1",
     "react-router-dom": "^5.0.0",
     "redux": "^4.0.1",
@@ -110,6 +104,7 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",
     "@babel/runtime": "^7.3.4",
+    "axios-mock-adapter": "^1.16.0",
     "babel-core": "^7.0.0-beta.4",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.3.1",

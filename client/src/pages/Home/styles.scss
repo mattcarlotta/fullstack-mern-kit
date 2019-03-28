@@ -1,9 +1,8 @@
 @import '../../styles/styles.scss';
 
-.app {
+.homeContainer {
   text-align: center;
-  height: 100vh;
-  color: $blue;
+  height: 100%;
   background-color: $black;
 }
 
@@ -20,4 +19,8 @@
 
 .title {
   margin: 0;
+}
+
+.textInfo {
+  margin: 5px;
 }

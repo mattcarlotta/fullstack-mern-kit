@@ -1,15 +1,20 @@
-const express = require('express');
+const express = require("express");
+const consign = require("consign");
 
 const app = express();
-const consign = require('consign');
 
-consign({ locale: 'en-us', verbose: false })
-  .include('middlewares')
-  // .then('database')
-  .then('shared')
-  // .then('models')
-  // .then("services")
-  .then('controllers')
-  .then('routes')
-  .then('server')
+consign({
+  cwd: `${process.cwd()}`,
+  extensions: [".js"],
+  locale: "en-us",
+  verbose: false
+})
+  .include("middlewares")
+  .then("database")
+  .then("seeds")
+  .then("utils")
+  .then("models")
+  .then("controllers")
+  .then("routes")
+  .then("server")
   .into(app);

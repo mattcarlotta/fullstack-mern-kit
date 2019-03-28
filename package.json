@@ -1,6 +1,6 @@
 {
   "name": "mern-starter-kit",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "main": "app.js",
   "description": "A fullstack MERN boilerplate.",
   "repository": "https://github.com/mattcarlotta/fullstack-mern-kit",
@@ -26,30 +26,31 @@
   },
   "betterScripts": {
     "dev": {
-      "command": "concurrently \"npm run server\" \"npm run client\"",
+      "command": "concurrently \"better-npm-run server\" \"npm run client\"",
       "env": {
         "HOST": "http://localhost:",
-        "client": "http://localhost:3000",
-        "database": "mongodb://localhost/boilerplate-dev-db",
+        "CLIENT": "http://localhost:3000",
+        "DATABASE": "mongodb://localhost/boilerplate-dev-db",
         "NODE_ENV": "development",
-        "PORT": 5000
+        "APIPORT": 5000
       }
     },
     "start": {
       "command": "node app.js",
       "env": {
         "HOST": "http://localhost:",
-        "client": "http://example.com",
-        "database": "mongodb://localhost/boilerplate-prod-db",
+        "CLIENT": "http://example.com",
+        "DATABASE": "mongodb://localhost/boilerplate-prod-db",
         "NODE_ENV": "production",
-        "PORT": 8080
+        "APIPORT": 8080
       }
     },
     "server": {
-      "command": "nodemon app.js",
+      "command": "nodemon ./app.js",
       "env": {
+        "DATABASE": "mongodb://localhost/boilerplate-dev-db",
         "NODE_ENV": "development",
-        "PORT": 5000
+        "APIPORT": 5000
       }
     }
   },
