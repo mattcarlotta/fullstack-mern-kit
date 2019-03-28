@@ -10,6 +10,8 @@
 
 [Commands](#commands)
 
+[Example API](#example-api)
+
 [Client Configuration](#client-configuration)
 
 [API Configuration](#api-configuration)
@@ -102,6 +104,15 @@ git clone git@github.com:mattcarlotta/fullstack-mern-kit.git
 | `test:front`     | Runs and watches all `.test.js` files.                                   |
 | `test:back`      | Runs and watches all `.test.js` files. (not hooked up)                   |
 
+## Example API
+
+Provided in this boilerplate is an example of how to integrate a RESTFUL API (utilizing MongoDB).
+
+If you wish to utilize the API:
+
+- <a href="https://docs.mongodb.com/manual/installation/#mongodb-community-edition">Install MongoDB</a> and make sure the service is up and running.
+- Navigate to `http://localhost:3000/users` to interact with the API from the client-side.
+
 ## Client Configuration
 
 <details>
@@ -138,11 +149,14 @@ git clone git@github.com:mattcarlotta/fullstack-mern-kit.git
 <details>
 <summary>Click to expand API configuration</summary>
 <pre><code>
-- database/setup.js: mongoose connection to local mongodb.
+- controllers: express route controllers.
+- database: mongoose connection to local mongodb.
 - middlewares: express middlewares.
-- models/users.js: mongoose model for a local mongodb.
+- models: mongoose models for a local mongodb.
+- routes: express routes.
+- seeds: mongo seed file.
 - server: express configuration.
-- shared: miscellaneous helpers.
+- utils: miscellaneous helpers.
 - app.js: API initialization configuration (click <a href="https://github.com/jarradseers/consign#consign">here</a> to see how `consign` works)
 </code></pre>
 </details>
@@ -154,7 +168,7 @@ If you run into any issues, please fill out an issue report <a href="https://git
 
 ### Client
 
-Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/client/package.json#L77-L165">here</a> to see latest versions.
+Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/client/package.json#L70-L160">here</a> to see latest versions.
 
 <details>
 <summary>Click to expand brief overview of client packages</summary>
@@ -197,7 +211,7 @@ Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/cl
 
 ### API
 
-Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/package.json#L67-L90">here</a> to see latest versions.
+Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/package.json#L68-L91">here</a> to see latest versions.
 
 <details>
 <summary>Click to expand brief overview of API packages</summary>

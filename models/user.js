@@ -1,5 +1,5 @@
-module.exports = app => {
-  const mongoose = app.get("mongoose");
+module.exports = (app) => {
+  const mongoose = app.get('mongoose');
 
   const userSchema = new mongoose.Schema({
     email: String,
@@ -12,12 +12,12 @@ module.exports = app => {
       suite: String,
       city: String,
       state: String,
-      zipCode: String
-    }
+      zipCode: String,
+    },
   });
 
   userSchema.statics.createUser = async function newUser(user) {
-    if (!user) throw new Error("User required!");
+    if (!user) throw new Error('User required!');
 
     try {
       return await this.create(user);
@@ -26,5 +26,5 @@ module.exports = app => {
     }
   };
 
-  mongoose.model("user", userSchema);
+  mongoose.model('user', userSchema);
 };
