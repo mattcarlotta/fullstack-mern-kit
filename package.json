@@ -66,7 +66,7 @@
   "lint-staged": {
     "*.js": [
       "eslint --fix",
-      "cross-env NODE_ENV=test DATABASE=mongodb://localhost/boilerplate-test-db jest --config ./jest.json --runInBand",
+      "cross-env NODE_ENV=test DATABASE=mongodb://localhost/boilerplate-test-db jest --config ./jest.json --runInBand --bail --findRelatedTests",
       "git add"
     ]
   },

@@ -31,9 +31,6 @@ const createUser = async (req, res, done) => {
       .status(201)
       .json({ message: `Successfully created ${req.body.userName}.` });
   } catch (err) {
-    if (err.toString().includes("E11000")) {
-      return sendError("Error: That username is already in use!", res, done);
-    }
     return sendError(err, res, done);
   }
 };
@@ -97,9 +94,6 @@ const updateUser = async (req, res, done) => {
       .status(201)
       .json({ message: `Successfully updated ${req.body.userName}.` });
   } catch (err) {
-    if (err.toString().includes("E11000")) {
-      return sendError("Error: That username is already in use!", res, done);
-    }
     return sendError(err, res, done);
   }
 };
