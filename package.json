@@ -1,6 +1,6 @@
 {
   "name": "mern-starter-kit",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "main": "app.js",
   "description": "A fullstack MERN boilerplate.",
   "repository": "https://github.com/mattcarlotta/fullstack-mern-kit",

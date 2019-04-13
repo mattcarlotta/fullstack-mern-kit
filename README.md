@@ -101,8 +101,8 @@ git clone git@github.com:mattcarlotta/fullstack-mern-kit.git
 | `lint:back`      | Lint all of API's `.js` files.                                           |
 | `lint:front`     | Lint all of client's `.js` files.                                        |
 | `lint:styles`    | Lint all `.scss` files.                                                  |
-| `test:front`     | Runs and watches all `.test.js` files.                                   |
-| `test:back`      | Runs and watches all `.test.js` files. (not hooked up)                   |
+| `test`           | Runs and watches all `.test.js` files for the server.                    |
+| `test:front`     | Runs and watches all `.test.js` files for the client.                    |
 
 ## Example API
 
