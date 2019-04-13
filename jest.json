@@ -1,0 +1,13 @@
+{
+  "testEnvironment": "node",
+  "verbose": false,
+  "clearMocks": true,
+  "modulePaths": ["<rootDir>", "node_modules"],
+  "setupFilesAfterEnv": ["<rootDir>/utils/setupTests.js"],
+  "transform": {
+    "^.+\\.(js)$": "babel-jest"
+  },
+  "moduleFileExtensions": ["js", "json"],
+  "testPathIgnorePatterns": ["<rootDir>/client/", "<rootDir>/node_modules/"],
+  "globalSetup": "<rootDir>/utils/globalSetup.js"
+}
