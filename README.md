@@ -159,8 +159,8 @@ If you wish to utilize the API:
 - routes: express routes.
 - seeds: mongo seed file.
 - server: express configuration.
-- utils: miscellaneous helpers.
-- app.js: API initialization configuration (click <a href="https://github.com/jarradseers/consign#consign">here</a> to see how `consign` works)
+- utils: configurations for starting the server and running a test environment.
+- app.js: API initialization configuration (registering babel for ES6 import/export syntax)
 </code></pre>
 </details>
 <br />
