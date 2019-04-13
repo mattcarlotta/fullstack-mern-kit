@@ -21,8 +21,8 @@
     "lint": "npm run lint-front --silent && npm run lint-back --silent",
     "lint:front": "npm run pre-commit --prefix client",
     "lint:back": "lint-staged",
-    "test:front": "npm run test --prefix client",
-    "test:back": "echo \"Error: no test specified\" && exit 1"
+    "test": "better-npm-run test",
+    "test:front": "npm run test --prefix client"
   },
   "betterScripts": {
     "dev": {
@@ -52,12 +52,23 @@
         "NODE_ENV": "development",
         "APIPORT": 5000
       }
+    },
+    "test": {
+      "command": "jest --config ./jest.json --watchAll",
+      "env": {
+        "CLIENT": "http://localhost:5001",
+        "DATABASE": "mongodb://localhost/boilerplate-test-db",
+        "NODE_ENV": "test",
+        "WATCHING": true,
+        "APIPORT": 5001
+      }
     }
   },
   "lint-staged": {
     "*.js": [
-      "prettier --write --single-quote",
-      "eslint --fix"
+      "eslint --fix",
+      "jest --config ./jest.json",
+      "git add"
     ]
   },
   "husky": {
@@ -66,26 +77,35 @@
     }
   },
   "dependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "@babel/register": "^7.4.0",
+    "babel-plugin-module-resolver": "^3.2.0",
     "better-npm-run": "^0.1.1",
     "bluebird": "^3.5.3",
     "body-parser": "^1.18.3",
     "concurrently": "^4.1.0",
-    "consign": "^0.1.6",
     "cors": "^2.8.5",
     "express": "^4.16.4",
+    "lodash": "^4.17.11",
     "moment": "^2.24.0",
     "mongoose": "^5.4.15",
     "morgan": "^1.9.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "react-dev-utils": "^8.0.0"
+    "react-dev-utils": "^8.0.0",
+    "supertest": "^4.0.2"
   },
   "devDependencies": {
+    "babel-jest": "^24.7.1",
     "eslint": "^5.14.1",
     "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-import-resolver-babel-module": "^5.0.1",
     "eslint-plugin-import": "^2.16.0",
     "husky": "^1.3.1",
+    "jest": "^24.7.1",
     "lint-staged": "^8.1.4",
+    "mongodb": "^3.2.3",
     "nodemon": "^1.18.10",
     "prettier": "^1.16.4"
   }
