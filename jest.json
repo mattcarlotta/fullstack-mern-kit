@@ -3,12 +3,11 @@
   "verbose": false,
   "clearMocks": true,
   "modulePaths": ["<rootDir>", "node_modules"],
-  "setupFilesAfterEnv": ["<rootDir>/setupTests.js"],
+  "setupFilesAfterEnv": ["<rootDir>/utils/setupTests.js"],
   "transform": {
     "^.+\\.(js)$": "babel-jest"
   },
   "moduleFileExtensions": ["js", "json"],
   "testPathIgnorePatterns": ["<rootDir>/client/", "<rootDir>/node_modules/"],
-  "globalSetup": "<rootDir>/utils/globalSetup.js",
-  "globalTeardown": "<rootDir>/utils/globalTeardown.js"
+  "globalSetup": "<rootDir>/utils/globalSetup.js"
 }

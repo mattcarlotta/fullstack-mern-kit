@@ -14,6 +14,11 @@ const addUser2 = {
   userName: "exampleuser9",
 };
 
+const addUser3 = {
+  ...newUser,
+  userName: "exampleuser10",
+};
+
 const updatedUser = {
   email: "updateuser@test.com",
   firstName: "Update",
@@ -87,8 +92,9 @@ describe("Create User Controller", () => {
   });
 
   it("handles invalid requests to update user details to one that already exists", async () => {
-    const user = await User.create(addUser2);
-    const req = mockRequest(null, updatedUser, null, { id: user._id });
+    await User.create(addUser2);
+    const user2 = await User.create(addUser3);
+    const req = mockRequest(null, addUser2, null, { id: user2._id });
 
     await updateUser(req, res);
 

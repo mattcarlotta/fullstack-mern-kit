@@ -9,6 +9,11 @@ const addUser = {
   userName: "exampleuser4",
 };
 
+const addUser2 = {
+  ...newUser,
+  userName: "duplicateuser",
+};
+
 const emptybody = {
   email: "",
   firstName: "",
@@ -19,8 +24,9 @@ const emptybody = {
 };
 
 describe("Create User Controller", () => {
-  beforeAll(() => {
+  beforeAll(async () => {
     mongodbConnection();
+    await User.createUser(addUser2);
   });
 
   let res;
@@ -55,7 +61,7 @@ describe("Create User Controller", () => {
   });
 
   it("handles invalid requests to create a duplicate user", async () => {
-    const req = mockRequest(null, addUser);
+    const req = mockRequest(null, addUser2);
 
     await createUser(req, res);
 

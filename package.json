@@ -54,7 +54,7 @@
       }
     },
     "test": {
-      "command": "jest --config ./jest.json --watchAll",
+      "command": "jest --config ./jest.json --runInBand --watchAll",
       "env": {
         "CLIENT": "http://localhost:5001",
         "DATABASE": "mongodb://localhost/boilerplate-test-db",
@@ -67,7 +67,7 @@
   "lint-staged": {
     "*.js": [
       "eslint --fix",
-      "jest --config ./jest.json",
+      "cross-env NODE_ENV=test DATABASE=mongodb://localhost/boilerplate-test-db jest --config ./jest.json --runInBand",
       "git add"
     ]
   },
@@ -98,6 +98,7 @@
   },
   "devDependencies": {
     "babel-jest": "^24.7.1",
+    "cross-env": "^5.2.0",
     "eslint": "^5.14.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-import-resolver-babel-module": "^5.0.1",
