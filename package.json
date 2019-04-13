@@ -59,7 +59,6 @@
         "CLIENT": "http://localhost:5001",
         "DATABASE": "mongodb://localhost/boilerplate-test-db",
         "NODE_ENV": "test",
-        "WATCHING": true,
         "APIPORT": 5001
       }
     }
