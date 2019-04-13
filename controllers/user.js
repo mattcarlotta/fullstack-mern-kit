@@ -23,6 +23,9 @@ const createUser = async (req, res, done) => {
   ) return sendError("Missing user card creation parameters.", res, done);
 
   try {
+    const userNameTaken = await User.findOne({ userName: req.body.userName });
+    if (userNameTaken) return sendError("Error: That username is already in use!", res, done);
+
     await User.createUser(req.body);
     res
       .status(201)
@@ -77,8 +80,18 @@ const seedDatabase = async (req, res, done) => {
 };
 
 const updateUser = async (req, res, done) => {
+  const { id } = req.params;
+
+  if (!id || !req.body) return sendError("Missing user update parameters.", res, done);
+
   try {
-    await User.findOneAndUpdate({ _id: req.params.id }, req.body);
+    const existingUser = await User.findById(id);
+    if (!existingUser) return sendError("Unable to locate that user to update.", res, done);
+
+    const userNameTaken = await User.findOne({ userName: req.body.userName });
+    if (userNameTaken) return sendError("Error: That username is already in use!", res, done);
+
+    await User.findOneAndUpdate({ _id: id }, req.body);
 
     res
       .status(201)

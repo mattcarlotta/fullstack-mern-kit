@@ -3,7 +3,9 @@ import { resolve } from "path";
 import express from "express";
 import openBrowser from "react-dev-utils/openBrowser";
 
-const { APIPORT, HOST, NODE_ENV } = process.env;
+const {
+  APIPORT, HOST, NODE_ENV, CLIENT,
+} = process.env;
 
 //= ===========================================================//
 // CREATE EXPRESS SERVER                                       //
@@ -27,7 +29,7 @@ export default (app) => {
       const API = `${HOST}${APIPORT}`;
       if (inProduction) {
         console.log(
-          `\nYour client application is running on \x1b[1m${API}\x1b[0m`,
+          `\nYour client application is running on \x1b[1m${CLIENT}\x1b[0m`,
         );
         console.log(`Your API is running on \x1b[1m${API}\x1b[0m\n`);
         openBrowser(API);

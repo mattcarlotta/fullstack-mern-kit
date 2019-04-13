@@ -36,7 +36,7 @@ describe("Delete User Controller", () => {
 
   it("handles invalid id params requests", async () => {
     const req = mockRequest(null, null, null, {
-      id: "5cb11f97d7cd972720377963",
+      id: "5cb11f97d7cd972720377962",
     });
 
     await deleteUser(req, res);
