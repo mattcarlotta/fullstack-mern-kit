@@ -6,12 +6,11 @@ client/build
 client/coverage
 client/node_modules
 
-
 #Server files and folders
 uploads/
 scrap/
+build/
 prod.json
-flightplan.js
 
 # Logs
 logs
