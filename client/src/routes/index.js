@@ -3,10 +3,11 @@ import { Route, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Helmet from "react-helmet";
 
-import Toast from "components/Toast";
-import Home from "pages/Home";
-import NotFound from "pages/NotFound";
-import ShowUsers from "pages/ShowUsers";
+import Home from "@pages/Home";
+import NotFound from "@pages/NotFound";
+import ShowUsers from "@pages/ShowUsers";
+import Toast from "@components/Toast";
+import GlobalStylesheet from "@styles/globalStylesheet";
 
 const config = {
 	htmlAttributes: { lang: "en" },
@@ -25,6 +26,7 @@ Toast({ type: "info", message: "Welcome to the Fullstack M.E.R.N. Kit!" });
 const Routes = () => (
 	<div>
 		<Helmet {...config} />
+		<GlobalStylesheet />
 		<ToastContainer
 			position="top-right"
 			autoClose={2500}

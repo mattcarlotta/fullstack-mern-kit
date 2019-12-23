@@ -2,7 +2,7 @@ import {
 	resetPopMessages,
 	setPopMessage,
 	setPopErrorMessage,
-} from "actions/server";
+} from "@actions/server";
 
 const initialState = {
 	error: "",

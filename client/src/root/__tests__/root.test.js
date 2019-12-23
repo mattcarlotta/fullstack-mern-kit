@@ -1,10 +1,9 @@
-import App from '../index.js';
+import App from "../index.js";
 
-describe('App', () => {
-  const wrapper = mount(<App />);
+const wrapper = mount(<App />);
 
-  it('renders without errors', () => {
-    const homeComponent = wrapper.find('.homeContainer');
-    expect(homeComponent).toHaveLength(1);
-  });
+describe("App", () => {
+	it("renders without errors", () => {
+		expect(wrapper.find(".homeContainer").exists()).toBeTruthy();
+	});
 });

@@ -1,12 +1,12 @@
 import { createElement } from "react";
 import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router-dom";
-import { shallow, mount } from 'enzyme';
-import thunk from 'redux-thunk';
-import { createBrowserHistory } from 'history';
-import { createStore, applyMiddleware } from 'redux';
-import rootReducer from 'reducers';
-import { store } from "root";
+import { shallow, mount } from "enzyme";
+import thunk from "redux-thunk";
+import { createBrowserHistory } from "history";
+import { createStore, applyMiddleware } from "redux";
+import rootReducer from "@reducers";
+import { store } from "@root";
 
 const history = createBrowserHistory();
 const middlewares = applyMiddleware(thunk);
@@ -22,7 +22,7 @@ const middlewares = applyMiddleware(thunk);
  * @returns {store} - redux store with
  */
 export const createStoreFactory = initialState =>
-  createStore(rootReducer(history), initialState, middlewares);
+	createStore(rootReducer(history), initialState, middlewares);
 
 /**
  * Factory function to create a ShallowWrapper for a component
@@ -32,9 +32,9 @@ export const createStoreFactory = initialState =>
  * @returns {ShallowWrapper}
  */
 export const shallowWrap = (Component, state = null) => {
-  const wrapper = shallow(Component);
-  if (state) wrapper.setState(state);
-  return wrapper;
+	const wrapper = shallow(Component);
+	if (state) wrapper.setState(state);
+	return wrapper;
 };
 
 /**
@@ -46,9 +46,9 @@ export const shallowWrap = (Component, state = null) => {
  * @returns {MountedWrapper}
  */
 export const mountWrap = (Component, state = null) => {
-  const wrapper = mount(Component);
-  if (state) wrapper.setState(state);
-  return wrapper;
+	const wrapper = mount(Component);
+	if (state) wrapper.setState(state);
+	return wrapper;
 };
 
 /**

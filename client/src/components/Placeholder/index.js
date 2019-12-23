@@ -1,12 +1,11 @@
 import React from "react";
-import Container from "components/Container";
+import Container from "@components/Container";
+import FadeIn from "@components/FadeIn";
 
 const Placeholder = () => (
-	<div className="placeholderContainer">
+	<FadeIn id="placeholder">
 		<Container animated />
-		<Container animated />
-		<Container animated />
-	</div>
+	</FadeIn>
 );
 
 export default Placeholder;

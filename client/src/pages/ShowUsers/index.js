@@ -3,11 +3,11 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Helmet from "react-helmet";
 import { connect } from "react-redux";
-import { toast } from "react-toastify";
-import Placeholder from "components/Placeholder";
-import DisplayUserList from "components/DisplayUserList";
-import UserListNavigation from "components/UserListNavigation";
-import * as actions from "actions/users";
+import Toast from "@components/Toast";
+import Placeholder from "@components/Placeholder";
+import DisplayUserList from "@components/DisplayUserList";
+import UserListNavigation from "@components/UserListNavigation";
+import * as actions from "@actions/users";
 import { preventScroll, usersContainer } from "./ShowUsers.module.scss";
 
 export class ShowUsers extends Component {
@@ -25,7 +25,9 @@ export class ShowUsers extends Component {
 			.fetchUsers()
 			.then(res => this.setState({ data: res.data, isLoading: false }))
 			.catch(err =>
-				this.setState({ isLoading: false }, () => toast.error(err)),
+				this.setState({ isLoading: false }, () =>
+					Toast({ type: "error", message: err }),
+				),
 			);
 	};
 
@@ -34,7 +36,9 @@ export class ShowUsers extends Component {
 			.seedDB()
 			.then(res => this.setState({ data: res.data, isLoading: false }))
 			.catch(err =>
-				this.setState({ isLoading: false }, () => toast.error(err)),
+				this.setState({ isLoading: false }, () =>
+					Toast({ type: "error", message: err }),
+				),
 			);
 	};
 
@@ -42,7 +46,7 @@ export class ShowUsers extends Component {
 		this.props
 			.deleteUser(id)
 			.then(res => this.updateUserList(res.data.message))
-			.catch(err => toast.error(err));
+			.catch(err => Toast({ type: "error", message: err }));
 	};
 
 	handleEditClick = id => this.setState({ isEditingID: id });
@@ -54,7 +58,7 @@ export class ShowUsers extends Component {
 	handleCloseModal = () => this.setState({ openModal: false });
 
 	updateUserList = message => {
-		if (message) toast.info(message);
+		if (message) Toast({ type: "success", message });
 		this.setState(
 			{
 				isLoading: true,

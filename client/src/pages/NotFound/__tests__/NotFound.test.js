@@ -1,10 +1,9 @@
-import NotFound from '../index';
+import NotFound from "../index";
 
-describe('NotFound', () => {
-  const wrapper = shallow(<NotFound />);
+const wrapper = shallow(<NotFound />);
 
-  it('renders without errors', () => {
-    const notFoundComponent = wrapper.find('.notfoundContainer');
-    expect(notFoundComponent).toHaveLength(1);
-  });
+describe("NotFound", () => {
+	it("renders without errors", () => {
+		expect(wrapper.find(".notfoundContainer").exists()).toBeTruthy();
+	});
 });

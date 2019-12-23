@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Button from "components/Button";
-import CreateIcon from "components/CreateIcon";
-import HomeIcon from "components/HomeIcon";
-import Link from "components/Link";
-import SeedIcon from "components/SeedIcon";
+import Button from "@components/Button";
+import CreateIcon from "@components/CreateIcon";
+import HomeIcon from "@components/HomeIcon";
+import Link from "@components/Link";
+import SeedIcon from "@components/SeedIcon";
 import { buttonContainer } from "./UserListNavigation.module.scss";
 
 const UserListNavigation = ({ onHandleOpenModal, onHandleSeedDatabase }) => (

@@ -1,6 +1,6 @@
 import get from "lodash/get";
 import axios from "axios";
-import { baseURL } from "../../config/envs";
+import { baseURL } from "@config/envs";
 
 export const app = axios.create({
 	baseURL,

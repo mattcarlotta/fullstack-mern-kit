@@ -10,11 +10,14 @@ const { inDevelopment } = require("./config/envs");
 // WEBPACK CONFIGURATION                                           //
 // =============================================================== //
 
+const devtool = inDevelopment ? "cheap-module-source-map" : false;
+const mode = inDevelopment ? "development" : "production";
+
 module.exports = {
-	devtool: inDevelopment ? "cheap-module-source-map" : false,
+	devtool,
 	devServer,
 	entry: [entryPath],
-	mode: inDevelopment ? "development" : "production",
+	mode,
 	module: { rules },
 	optimization,
 	output,

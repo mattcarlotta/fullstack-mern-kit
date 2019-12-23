@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { linkContainer, linkStyle } from "./StyledLink.module.scss";
+import { linkStyle } from "./StyledLink.module.scss";
 
 const StyledLink = ({ children, style, to }) => (
-	<div className={linkContainer} style={style}>
+	<div css="width: 170px;margin: 0 auto;" style={style}>
 		<Link className={linkStyle} to={to}>
 			{children}
 		</Link>
