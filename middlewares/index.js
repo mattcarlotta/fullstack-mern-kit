@@ -5,16 +5,7 @@ import compression from "compression";
 import moment from "moment-timezone";
 import "@database";
 
-const { CLIENT, NODE_ENV, inProduction, inTesting } = process.env;
-
-const shouldCompress = (req, res) => {
-  if (req.headers["x-no-compression"]) return false;
-  return compression.filter(req, res);
-};
-
-const logging = inProduction
-  ? ":remote-addr [:date] :referrer :method :url HTTP/:http-version :status :res[content-length]"
-  : "tiny";
+const { CLIENT, inProduction, inTesting } = process.env;
 
 //= ===========================================================//
 /* APP MIDDLEWARE */
@@ -27,11 +18,19 @@ export default app => {
       origin: CLIENT
     })
   ); // allows receiving of cookies/tokens from front-end
-  if (!inTesting) app.use(morgan(logging)); // logging framework
+  if (!inTesting)
+    app.use(
+      morgan(
+        inProduction
+          ? ":remote-addr [:date] :referrer :method :url HTTP/:http-version :status :res[content-length]"
+          : "tiny"
+      )
+    ); // logging framework
   app.use(
     compression({
       level: 6, // set compression level from 1 to 9 (6 by default)
-      filter: shouldCompress // set predicate to determine whether to compress
+      filter: (req, res) =>
+        req.headers["x-no-compression"] ? false : compression.filter(req, res) // set predicate to determine whether to compress
     })
   );
   app.use(bodyParser.json()); // parses header requests (req.body)

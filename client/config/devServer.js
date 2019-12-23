@@ -5,7 +5,6 @@ const { inDevelopment, PORT } = require("./envs");
 // WEBPACK DEV SERVER CONFIGURATION                                //
 // =============================================================== //
 
-/* webpack dev server options */
 module.exports = {
 	/* where to host */
 	host: "localhost",

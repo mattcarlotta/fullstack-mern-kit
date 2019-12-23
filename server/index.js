@@ -4,22 +4,21 @@ import express from "express";
 import openBrowser from "react-dev-utils/openBrowser";
 import { currentDirectory } from "@utils/helpers";
 
-const { APIPORT, HOST, NODE_ENV, CLIENT, inProduction } = process.env;
+const { APIPORT, HOST, CLIENT, inProduction } = process.env;
 
 //= ===========================================================//
 // CREATE EXPRESS SERVER                                       //
 //= ===========================================================//
 
 export default app => {
-  //= ===========================================================//
-  // PRODUCTION CONFIG                                           //
-  //= ===========================================================//
   if (inProduction) {
-    app.use(express.static("client/dist")); // express will serve up production assets
+    // express will serve up production assets
+    app.use(express.static("client/dist"));
 
-    app.get("*", (req, res) =>
+    // express will serve up the front-end index.html file if it doesn't recognize the route
+    app.get("*", (_, res) =>
       res.sendFile(resolve(`${currentDirectory}/client/dist/index.html`))
-    ); // express will serve up the front-end index.html file if it doesn't recognize the route
+    );
   }
 
   app.listen(APIPORT, err => {

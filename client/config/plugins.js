@@ -1,7 +1,7 @@
 const {
 	DefinePlugin,
 	HotModuleReplacementPlugin,
-	IgnorePlugin,
+	// IgnorePlugin,
 } = require("webpack");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
 	.BundleAnalyzerPlugin;
@@ -76,16 +76,12 @@ const plugins = [
 	new ManifestPlugin({
 		fileName: "asset-manifest.json",
 		publicPath,
-		generate: (seed, files) => {
-			const manifestFiles = files.reduce(function(manifest, file) {
+		generate: (seed, files) => ({
+			files: files.reduce((manifest, file) => {
 				manifest[file.name] = file.path;
 				return manifest;
-			}, seed);
-
-			return {
-				files: manifestFiles,
-			};
-		},
+			}, seed),
+		}),
 	}),
 ];
 

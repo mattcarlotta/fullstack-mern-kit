@@ -6,10 +6,6 @@ const { inDevelopment } = require("./envs");
 // WEBPACK OPTIMATIZATIONS                                         //
 // =============================================================== //
 
-const cssProcessorOptions = !inDevelopment
-	? { cssProcessorOptions: { map: { inline: false, annotation: true } } }
-	: {};
-
 /* webpack compiler optimizations */
 const optimization = {
 	minimize: !inDevelopment,
@@ -52,7 +48,11 @@ const optimization = {
 			sourceMap: false,
 		}),
 		/* compile and optimize SCSS to CSS */
-		new OptimizeCSSAssetsPlugin(cssProcessorOptions),
+		new OptimizeCSSAssetsPlugin(
+			!inDevelopment
+				? { cssProcessorOptions: { map: { inline: false, annotation: true } } }
+				: {},
+		),
 	],
 	/* keep run time chunk to a single chunk */
 	runtimeChunk: "single",

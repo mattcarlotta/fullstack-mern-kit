@@ -3,7 +3,7 @@ import User from "@models/user";
 import { sendError } from "@utils/helpers";
 import seeds from "@seeds/data";
 
-const createUser = async (req, res, done) => {
+const createUser = async (req, res) => {
   try {
     const {
       email,
@@ -34,7 +34,7 @@ const createUser = async (req, res, done) => {
   }
 };
 
-const deleteUser = async (req, res, done) => {
+const deleteUser = async (req, res) => {
   try {
     const { id } = req.params;
     if (!id) throw "Missing user delete id parameter.";
@@ -52,7 +52,7 @@ const deleteUser = async (req, res, done) => {
   }
 };
 
-const getUsers = async (req, res, done) => {
+const getUsers = async (_, res) => {
   try {
     const users = await User.find({});
 
@@ -62,7 +62,7 @@ const getUsers = async (req, res, done) => {
   }
 };
 
-const seedDatabase = async (req, res, done) => {
+const seedDatabase = async (_, res) => {
   try {
     await User.deleteMany({});
     await User.insertMany(seeds);
@@ -74,7 +74,7 @@ const seedDatabase = async (req, res, done) => {
   }
 };
 
-const updateUser = async (req, res, done) => {
+const updateUser = async (req, res) => {
   try {
     const { id: _id } = req.params;
     const { userName } = req.body;

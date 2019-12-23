@@ -54,8 +54,7 @@ const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 
-/* webpack module rules */
-const rules = [
+module.exports = [
 	/* lints JS files on compilation */
 	jsRule({
 		enforce: "pre",
@@ -103,5 +102,3 @@ const rules = [
 		modules: true,
 	}),
 ];
-
-module.exports = rules;
