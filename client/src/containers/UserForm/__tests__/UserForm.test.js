@@ -119,7 +119,7 @@ describe('Create/Edit User Form', () => {
 
     it('closes', () => {
       wrapper.update();
-      wrapper.find('button.closeButton').simulate('click');
+      wrapper.find('FaTimes').simulate('click');
       expect(wrapper.find('div.errorContainer')).toHaveLength(0);
     });
   });

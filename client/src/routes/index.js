@@ -1,34 +1,46 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import Helmet from 'react-helmet';
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import Helmet from "react-helmet";
 
-import Home from 'pages/Home';
-import Message from 'containers/PopMessage';
-import NotFound from 'pages/NotFound';
-import ShowUsers from 'pages/ShowUsers';
+import Toast from "components/Toast";
+import Home from "pages/Home";
+import NotFound from "pages/NotFound";
+import ShowUsers from "pages/ShowUsers";
 
 const config = {
-  htmlAttributes: { lang: 'en' },
-  title: 'Fullstack-MERN-Kit',
-  titleTemplate: 'Fullstack-MERN-Kit - %s',
-  meta: [
-    {
-      name: 'description',
-      content: 'The best MERN starter boilerplate in the world.',
-    },
-  ],
+	htmlAttributes: { lang: "en" },
+	title: "MERN Kit",
+	titleTemplate: "MERN Kit - %s",
+	meta: [
+		{
+			name: "description",
+			content: "The best MERN starter boilerplate in the world.",
+		},
+	],
 };
 
+Toast({ type: "info", message: "Welcome to the Fullstack M.E.R.N. Kit!" });
+
 const Routes = () => (
-  <div>
-    <Message />
-    <Helmet {...config} />
-    <Switch>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/users" component={ShowUsers} />
-      <Route component={NotFound} />
-    </Switch>
-  </div>
+	<div>
+		<Helmet {...config} />
+		<ToastContainer
+			position="top-right"
+			autoClose={2500}
+			hideProgressBar={false}
+			newestOnTop={false}
+			closeOnClick={false}
+			pauseOnVisibilityChange
+			draggable
+			pauseOnHover
+		/>
+		<Switch>
+			<Route exact path="/" component={Home} />
+			<Route exact path="/users" component={ShowUsers} />
+			<Route component={NotFound} />
+		</Switch>
+	</div>
 );
 
 export default Routes;

@@ -1,22 +1,22 @@
 import mongoose from "mongoose";
-import mongodbConnection from "database";
-import User from "models/user";
-import { updateUser } from "controllers/user";
+import mongodbConnection from "@database";
+import User from "@models/user";
+import { updateUser } from "@controllers/user";
 import { mockRequest, mockResponse, newUser } from "../../__mocks__/helpers";
 
 const addUser = {
   ...newUser,
-  userName: "exampleuser8",
+  userName: "exampleuser8"
 };
 
 const addUser2 = {
   ...newUser,
-  userName: "exampleuser9",
+  userName: "exampleuser9"
 };
 
 const addUser3 = {
   ...newUser,
-  userName: "exampleuser10",
+  userName: "exampleuser10"
 };
 
 const updatedUser = {
@@ -30,8 +30,8 @@ const updatedUser = {
     suite: "Apt 1404",
     city: "Upton",
     state: "MA",
-    zipCode: "55555",
-  },
+    zipCode: "55555"
+  }
 };
 
 const emptybody = {
@@ -40,7 +40,7 @@ const emptybody = {
   lastName: "",
   userName: "",
   backgroundInfo: "",
-  address: {},
+  address: {}
 };
 
 describe("Create User Controller", () => {
@@ -53,7 +53,7 @@ describe("Create User Controller", () => {
     res = mockResponse();
   });
 
-  afterAll(async (done) => {
+  afterAll(async done => {
     await User.deleteMany({});
     mongoose.disconnect(done);
   });
@@ -64,19 +64,19 @@ describe("Create User Controller", () => {
     await updateUser(req, res);
     expect(res.status).toHaveBeenCalledWith(400);
     expect(res.json).toHaveBeenCalledWith({
-      err: "Missing user update parameters.",
+      err: "Missing user update parameters."
     });
   });
 
   it("handles invalid id params update requests", async () => {
     const req = mockRequest(null, updatedUser, null, {
-      id: "5cb11f97d7cd972720377963",
+      id: "5cb11f97d7cd972720377963"
     });
 
     await updateUser(req, res);
     expect(res.status).toHaveBeenCalledWith(400);
     expect(res.json).toHaveBeenCalledWith({
-      err: "Unable to locate that user to update.",
+      err: "Unable to locate that user to update."
     });
   });
 
@@ -87,7 +87,7 @@ describe("Create User Controller", () => {
     await updateUser(req, res);
     expect(res.status).toHaveBeenCalledWith(201);
     expect(res.json).toHaveBeenCalledWith({
-      message: `Successfully updated ${req.body.userName}.`,
+      message: `Successfully updated ${req.body.userName}.`
     });
   });
 
@@ -100,7 +100,7 @@ describe("Create User Controller", () => {
 
     expect(res.status).toHaveBeenCalledWith(400);
     expect(res.json).toHaveBeenCalledWith({
-      err: "Error: That username is already in use!",
+      err: "Error: That username is already in use!"
     });
   });
 });

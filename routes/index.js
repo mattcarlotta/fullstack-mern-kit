@@ -1,5 +1,5 @@
 import userRoutes from "./user";
 
-export default (app) => {
+export default app => {
   userRoutes(app);
 };

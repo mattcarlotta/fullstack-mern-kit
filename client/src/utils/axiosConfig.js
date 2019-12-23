@@ -1,18 +1,18 @@
-import get from 'lodash/get';
-import axios from 'axios';
-import { inDevelopment, APIPORT } from '../../config/envs';
+import get from "lodash/get";
+import axios from "axios";
+import { baseURL } from "../../config/envs";
 
 export const app = axios.create({
-  baseURL: `http://localhost:${APIPORT}/api/`,
+	baseURL,
 });
 
 app.interceptors.response.use(
-  response => response,
-  error => {
-    const err = get(error, ['response', 'data', 'err']);
+	response => response,
+	error => {
+		const err = get(error, ["response", "data", "err"]);
 
-    return err ? Promise.reject(err) : Promise.reject(error.message);
-  },
+		return Promise.reject(err || error.message);
+	},
 );
 
 export default app;

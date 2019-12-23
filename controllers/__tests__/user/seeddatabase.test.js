@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 import { ObjectID } from "mongodb";
-import mongodbConnection from "database";
-import User from "models/user";
-import { seedDatabase } from "controllers/user";
+import mongodbConnection from "@database";
+import User from "@models/user";
+import { seedDatabase } from "@controllers/user";
 import { mockRequest, mockResponse } from "../../__mocks__/helpers";
 
 describe("SeedDatabase User Controller", () => {
@@ -15,7 +15,7 @@ describe("SeedDatabase User Controller", () => {
     res = mockResponse();
   });
 
-  afterAll(async (done) => {
+  afterAll(async done => {
     await User.deleteMany({});
     mongoose.disconnect(done);
   });
@@ -35,15 +35,15 @@ describe("SeedDatabase User Controller", () => {
             state: expect.any(String),
             street: expect.any(String),
             suite: expect.any(String),
-            zipCode: expect.any(String),
+            zipCode: expect.any(String)
           }),
           backgroundInfo: expect.any(String),
           email: expect.any(String),
           firstName: expect.any(String),
           lastName: expect.any(String),
-          userName: expect.any(String),
-        }),
-      ]),
+          userName: expect.any(String)
+        })
+      ])
     });
   });
 });

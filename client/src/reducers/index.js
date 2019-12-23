@@ -1,10 +1,10 @@
-import { combineReducers } from 'redux';
-import { connectRouter } from 'connected-react-router';
-import serverReducer from './server';
+import { combineReducers } from "redux";
+import { connectRouter } from "connected-react-router";
+import serverReducer from "./server";
 
 const reducers = {
-  server: serverReducer,
+	server: serverReducer,
 };
 
 export default history =>
-  combineReducers({ router: connectRouter(history), ...reducers });
+	combineReducers({ router: connectRouter(history), ...reducers });

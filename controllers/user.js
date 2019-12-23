@@ -1,48 +1,46 @@
 import isEmpty from "lodash/isEmpty";
-import User from "models/user";
-import { sendError } from "utils/helpers";
-import seeds from "seeds/data";
+import User from "@models/user";
+import { sendError } from "@utils/helpers";
+import seeds from "@seeds/data";
 
 const createUser = async (req, res, done) => {
-  const {
-    email,
-    firstName,
-    lastName,
-    userName,
-    backgroundInfo,
-    address,
-  } = req.body;
-
-  if (
-    !email
-    || !firstName
-    || !lastName
-    || !userName
-    || !backgroundInfo
-    || isEmpty(address)
-  ) return sendError("Missing user card creation parameters.", res, done);
-
   try {
-    const userNameTaken = await User.findOne({ userName: req.body.userName });
-    if (userNameTaken) return sendError("Error: That username is already in use!", res, done);
+    const {
+      email,
+      firstName,
+      lastName,
+      userName,
+      backgroundInfo,
+      address
+    } = req.body;
+
+    if (
+      !email ||
+      !firstName ||
+      !lastName ||
+      !userName ||
+      !backgroundInfo ||
+      isEmpty(address)
+    )
+      throw "Missing user card creation parameters.";
+
+    const userNameTaken = await User.findOne({ userName });
+    if (userNameTaken) throw "Error: That username is already in use!";
 
     await User.createUser(req.body);
-    res
-      .status(201)
-      .json({ message: `Successfully created ${req.body.userName}.` });
+    res.status(201).json({ message: `Successfully created ${userName}.` });
   } catch (err) {
-    return sendError(err, res, done);
+    return sendError(err, res);
   }
 };
 
 const deleteUser = async (req, res, done) => {
-  const { id } = req.params;
-
-  if (!id) return sendError("Missing user delete id parameter.", res, done);
-
   try {
+    const { id } = req.params;
+    if (!id) throw "Missing user delete id parameter.";
+
     const existingUser = await User.findById(id);
-    if (!existingUser) return sendError("Unable to locate that user for deletion.", res, done);
+    if (!existingUser) throw "Unable to locate that user for deletion.";
 
     await User.findByIdAndDelete(existingUser.id);
 
@@ -50,7 +48,7 @@ const deleteUser = async (req, res, done) => {
       .status(201)
       .json({ message: `Successfully deleted ${existingUser.userName}.` });
   } catch (err) {
-    return sendError(err, res, done);
+    return sendError(err, res);
   }
 };
 
@@ -60,7 +58,7 @@ const getUsers = async (req, res, done) => {
 
     res.status(200).send({ users });
   } catch (err) {
-    return sendError(err, res, done);
+    return sendError(err, res);
   }
 };
 
@@ -72,32 +70,30 @@ const seedDatabase = async (req, res, done) => {
 
     res.status(201).send({ users });
   } catch (err) {
-    return sendError(err, res, done);
+    return sendError(err, res);
   }
 };
 
 const updateUser = async (req, res, done) => {
-  const { id } = req.params;
-
-  if (!id || !req.body) return sendError("Missing user update parameters.", res, done);
-
   try {
-    const existingUser = await User.findById(id);
-    if (!existingUser) return sendError("Unable to locate that user to update.", res, done);
+    const { id: _id } = req.params;
+    const { userName } = req.body;
+    if (!_id || !userName) throw "Missing user update parameters.";
 
-    const userNameTaken = await User.findOne({ userName: req.body.userName });
-    if (userNameTaken) return sendError("Error: That username is already in use!", res, done);
+    const existingUser = await User.findOne({ _id });
+    if (!existingUser) throw "Unable to locate that user to update.";
 
-    await User.findOneAndUpdate({ _id: id }, req.body);
+    if (existingUser.userName !== userName) {
+      const userNameTaken = await User.findOne({ userName });
+      if (userNameTaken) throw "Error: That username is already in use!";
+    }
 
-    res
-      .status(201)
-      .json({ message: `Successfully updated ${req.body.userName}.` });
+    await User.updateOne({ _id }, req.body);
+
+    res.status(201).json({ message: `Successfully updated ${userName}.` });
   } catch (err) {
-    return sendError(err, res, done);
+    return sendError(err, res);
   }
 };
 
-export {
-  createUser, deleteUser, getUsers, seedDatabase, updateUser,
-};
+export { createUser, deleteUser, getUsers, seedDatabase, updateUser };
