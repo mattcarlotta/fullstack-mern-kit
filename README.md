@@ -180,7 +180,7 @@ If you run into any issues, please fill out an issue report <a href="https://git
 
 ### Client
 
-Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/client/package.json#L106-L195">here</a> to see latest versions.
+Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/client/package.json#L70-L160">here</a> to see latest versions.
 
 <details>
 <summary>Click to expand brief overview of client packages</summary>
@@ -221,7 +221,7 @@ Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/cl
 
 ### API
 
-Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/package.json#L47-L82">here</a> to see latest versions.
+Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/package.json#L78-L111">here</a> to see latest versions.
 
 <details>
 <summary>Click to expand brief overview of API packages</summary>
