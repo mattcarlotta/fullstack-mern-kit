@@ -11,7 +11,7 @@ const inStaging = NODE_ENV_DEV === "staging";
 const baseURL =
 	inDevelopment || inStaging
 		? `http://localhost:${APIPORT}/api/`
-		: "https://sjsiceteam.com/api/";
+		: "https://example.com/api/";
 
 module.exports = {
 	/*  boolean to use bundle analyzer */

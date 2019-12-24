@@ -1,6 +1,6 @@
 {
-	"short_name": "React Starter Kit",
-	"name": "A React Boilerplate",
+	"short_name": "MERN Kit",
+	"name": "A Fullstack MERN Boilerplate",
 	"icons": [
 		{
 			"src": "favicon.ico",

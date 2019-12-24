@@ -1,3 +1,16 @@
+const { readdirSync, statSync } = require("fs");
+const { resolve } = require("path");
+
+const readDirectory = path =>
+	readdirSync(path).reduce((acc, folder) => {
+		const dirPath = `${path}/${folder}`;
+		if (statSync(resolve(dirPath)).isDirectory()) {
+			acc[`@${folder.replace(/[^\w\s]/gi, "")}`] = dirPath;
+		}
+
+		return acc;
+	}, {});
+
 module.exports = function(api) {
 	api.cache(true);
 
@@ -15,22 +28,7 @@ module.exports = function(api) {
 		plugins: [
 			[
 				"module-resolver",
-				{
-					alias: {
-						"@actions": "./src/actions",
-						"@components": "./src/components",
-						"@config": "./config",
-						"@containers": "./src/containers",
-						"@images": "./src/images",
-						"@pages": "./src/pages",
-						"@reducers": "./src/reducers",
-						"@root": "./src/root",
-						"@routes": "./src/routes",
-						"@styles": "./src/styles",
-						"@types": "./src/types",
-						"@utils": "./src/utils",
-					},
-				},
+				{ alias: { ...readDirectory("./src"), "@config": "./config" } },
 			],
 			"@babel/plugin-transform-runtime",
 			"babel-plugin-styled-components",
