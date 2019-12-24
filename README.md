@@ -50,6 +50,7 @@
 |   |   └── index.html
 |   |
 |   ├── src
+|   |   ├── actions
 |   |   ├── components
 |   |   ├── containers
 |   |   ├── images
@@ -57,7 +58,7 @@
 |   |   ├── reducers
 |   |   ├── root
 |   |   ├── routes
-|   |   ├── store
+|   |   ├── sagas
 |   |   ├── styles
 |   |   ├── types
 |   |   ├── utils
@@ -67,6 +68,7 @@
 |
 ├── controllers
 ├── database
+├── env
 ├── middlewares
 ├── models
 ├── routes
@@ -91,18 +93,25 @@ git clone git@github.com:mattcarlotta/fullstack-mern-kit.git
 
 ## Commands
 
-| `yarn <command>` | Description                                                              |
-| ---------------- | ------------------------------------------------------------------------ |
-| `dev`            | Starts both servers (client: `localhost:3000`, API: `localhost:5000`).   |
-| `initialize`     | Installs dependencies for client and API servers.                        |
-| `start`          | Starts a production server at `localhost:8080` (must run `build` first). |
-| `build`          | Compiles client application to a `client/dist` folder.                   |
-| `lint`           | Lints all `.js` files.                                                   |
-| `lint:back`      | Lint all of API's `.js` files.                                           |
-| `lint:front`     | Lint all of client's `.js` files.                                        |
-| `lint:styles`    | Lint all `.scss` files.                                                  |
-| `test`           | Runs and watches all `.test.js` files for the server.                    |
-| `test:front`     | Runs and watches all `.test.js` files for the client.                    |
+| `yarn <command>`  | Description                                                                            |
+| ----------------- | -------------------------------------------------------------------------------------- |
+| `dev`             | Starts both servers (client: `localhost:3000`, API: `localhost:5000`).                 |
+| `initialize`      | Installs dependencies for client and API servers.                                      |
+| `start`           | Starts a production server at `localhost:8080` (must run `build` and `compile` first). |
+| `compile`         | Compiles server application to a `build` folder.                                       |
+| `build`           | Compiles client application to a `client/dist` folder.                                 |
+| `checkbuild`      | Checks to see if the `client/dist` folder is ES5 compliant (for IE11).                 |
+| `lint`            | Lints all `.js` files.                                                                 |
+| `lint:back`       | Lint all of API's `.js` files.                                                         |
+| `lint:front`      | Lint all of client's `.js` files.                                                      |
+| `lint:styles`     | Lint all `.scss` files.                                                                |
+| `test`            | Runs `.test.js` files for the client and server.                                       |
+| `test:front`      | Runs `.test.js` files for the client only.                                             |
+| `test:frontcov`   | Runs `.test.js` files for the client with code coverage.                               |
+| `test:frontwatch` | Runs and watches `.test.js` files for the client.                                      |
+| `test:back`       | Runs `.test.js` files for the server only.                                             |
+| `test:backcov`    | Runs `.test.js` files for the server with code coverage.                               |
+| `test:backwatch`  | Runs and watches `.test.js` files for the server.                                      |
 
 ## Example API
 
@@ -136,12 +145,12 @@ If you wish to utilize the API:
 - client/src/utils/setup/setupTest.js: enzyme test setup for your React components.
 - client/src/utils/axiosConfig.js: custom axios configuration.
 - client/src/utils/index.js: custom test functions.
-- client/.babelrc: babel config for react js files.
-- client/.browserslistrc: browsers list config.
+- client/.browserslistrc: browsers list config (for babel transpiling).
 - client/.eslintignore: eslint config for ignoring scss files.
 - client/.eslintrc: eslint config for linting js files.
 - client/.prettierc: prettier config.
 - client/.stylelintrc.json: stylelint config for linting scss files.
+- client/babel.config.js: babel config for react js files.
 - client/jest.json: jest config.
 </code></pre>
 </details>
@@ -171,7 +180,7 @@ If you run into any issues, please fill out an issue report <a href="https://git
 
 ### Client
 
-Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/client/package.json#L70-L160">here</a> to see latest versions.
+Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/client/package.json#L106-L195">here</a> to see latest versions.
 
 <details>
 <summary>Click to expand brief overview of client packages</summary>
@@ -183,7 +192,6 @@ Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/cl
 - <a href="https://github.com/eslint/eslint/">Eslint</a>
 - <a href="http://airbnb.io/enzyme/">Enzyme</a>
 - <a href="https://github.com/smooth-code/error-overlay-webpack-plugin">Error Overlay Webpack Plugin</a>
-- <a href="https://github.com/expressjs/express">Express</a>
 - <a href="https://github.com/geowarin/friendly-errors-webpack-plugin">Friendly Errors Webpack Plugin</a>
 - <a href="https://github.com/ReactTraining/history">History</a>
 - <a href="https://github.com/typicode/husky">Husky</a>
@@ -197,8 +205,7 @@ Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/cl
 - <a href="https://github.com/ReactTraining/react-router/tree/master/packages/react-router-dom">React Router Dom</a>
 - <a href="https://github.com/reduxjs/redux">Redux</a>
 - <a href="https://github.com/zalmoxisus/redux-devtools-extension">Redux DevTools Extension</a>
-- <a href="https://redux-form.com/">Redux Form</a>
-- <a href="https://github.com/reduxjs/redux-thunk">Redux Thunk</a>
+- <a href="https://redux-saga.js.org/">Redux Saga</a>
 - <a href="https://github.com/webpack-contrib/sass-loader">Sass Loader</a>
 - <a href="https://stylelint.io/">Stylelint</a>
 - <a href="https://github.com/kristerkari/stylelint-scss">Stylelint-SCSS</a>
@@ -214,18 +221,19 @@ Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/cl
 
 ### API
 
-Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/package.json#L78-L111">here</a> to see latest versions.
+Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/package.json#L47-L82">here</a> to see latest versions.
 
 <details>
 <summary>Click to expand brief overview of API packages</summary>
 <pre><code>
 - <a href="https://github.com/petkaantonov/bluebird">Bluebird</a>
 - <a href="https://github.com/expressjs/body-parser">Body Parser</a>
+- <a href="https://github.com/expressjs/compression">Compression</a>
 - <a href="https://github.com/kimmobrunfeldt/concurrently">Concurrently</a>
 - <a href="https://github.com/jarradseers/consign">Consign</a>
 - <a href="https://github.com/expressjs/cors">CORS</a>
 - <a href="http://expressjs.com/">Express</a>
-- <a href="http://momentjs.com/">Moment</a>
+- <a href="hhttps://momentjs.com/timezone/">Moment Timezone</a>
 - <a href="https://mongoosejs.com/">Mongoose</a>
 - <a href="https://github.com/expressjs/morgan">Morgan</a>
 - <a href="http://www.passportjs.org/">Passport</a>

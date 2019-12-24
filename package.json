@@ -12,6 +12,7 @@
     "npm": ">=6"
   },
   "scripts": {
+    "checkbuild": "npm run checkbuild --prefix client",
     "compile": "rimraf build && babel ./ -d build --no-comments --ignore node_modules,client,**/__tests__,coverage,setupTests.js,**/__mocks__",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "initialize": "yarn install && cd client && yarn install && cd ..",
