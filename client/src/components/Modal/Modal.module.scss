@@ -51,7 +51,6 @@
 }
 
 .modalTitle {
-	display: inline-block;
 	padding: 2px;
 	float: left;
 	font-weight: bold;
@@ -61,7 +60,7 @@
 .modalTitleContainer {
 	padding: 7px 12px;
 	border-bottom: 1px solid $lightgrey;
-	height: 30px;
+	height: 42px;
 
 	&::after {
 		@extend %clear-fix;

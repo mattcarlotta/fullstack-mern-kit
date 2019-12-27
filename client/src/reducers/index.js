@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
 import { connectRouter } from "connected-react-router";
-import serverReducer from "./server";
+import userReducer from "./Users";
 
 const reducers = {
-	server: serverReducer,
+	users: userReducer,
 };
 
 export default history =>

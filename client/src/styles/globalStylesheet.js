@@ -43,7 +43,7 @@ const GlobalStyle = createGlobalStyle`
       background-color: #eee;
     }
     50% {
-      background-color: #e4e4e4;
+      background-color: #ccc;
     }
     100% {
       background-color: #eee;
@@ -54,7 +54,7 @@ const GlobalStyle = createGlobalStyle`
       background-color: #eee;
     }
     50% {
-      background-color: #e4e4e4;
+      background-color: #ccc;
     }
     100% {
       background-color: #eee;

@@ -16,32 +16,31 @@ const DisplayUserList = ({
 	onHandleDeleteClick,
 	onHandleEditClick,
 	onHandleResetEditClick,
-	onUpdateUserList,
 	updateUser,
 }) => (
 	<Fragment>
 		{openModal && (
 			<Modal closeModal={onHandleCloseModal} title="Create New User">
-				<UserForm submitAction={createUser} updateUserList={onUpdateUserList} />
+				<UserForm submitAction={createUser} resetForm={onHandleCloseModal} />
 			</Modal>
 		)}
-		{!isEmpty(data) && !isEmpty(data.users) ? (
-			data.users.map(props => (
+		{!isEmpty(data) ? (
+			data.map(props => (
 				<Container key={props._id}>
 					{isEditingID !== props._id ? (
 						<Card
-							key={props._id}
 							{...props}
+							key={props._id}
 							onEditClick={() => onHandleEditClick(props._id)}
 							onDeleteClick={() => onHandleDeleteClick(props._id)}
 						/>
 					) : (
 						<UserForm
-							key={props._id}
 							{...props}
+							key={props._id}
 							cancelUpdate={onHandleResetEditClick}
+							resetForm={onHandleCloseModal}
 							submitAction={updateUser}
-							updateUserList={onUpdateUserList}
 							isEditing
 						/>
 					)}
@@ -55,28 +54,26 @@ const DisplayUserList = ({
 
 DisplayUserList.propTypes = {
 	_id: PropTypes.string,
-	data: PropTypes.shape({
-		users: PropTypes.arrayOf(
-			PropTypes.shape({
-				_id: PropTypes.string,
-				isEditing: PropTypes.bool,
-				email: PropTypes.string,
-				backgroundInfo: PropTypes.string,
-				firstName: PropTypes.string,
-				lastName: PropTypes.string,
-				onDeleteClick: PropTypes.func,
-				onEditClick: PropTypes.func,
-				userName: PropTypes.string,
-				address: PropTypes.shape({
-					street: PropTypes.string,
-					suite: PropTypes.string,
-					city: PropTypes.string,
-					state: PropTypes.string,
-					zipCode: PropTypes.string,
-				}),
+	data: PropTypes.arrayOf(
+		PropTypes.shape({
+			_id: PropTypes.string,
+			isEditing: PropTypes.bool,
+			email: PropTypes.string,
+			backgroundInfo: PropTypes.string,
+			firstName: PropTypes.string,
+			lastName: PropTypes.string,
+			onDeleteClick: PropTypes.func,
+			onEditClick: PropTypes.func,
+			userName: PropTypes.string,
+			address: PropTypes.shape({
+				street: PropTypes.string,
+				suite: PropTypes.string,
+				city: PropTypes.string,
+				state: PropTypes.string,
+				zipCode: PropTypes.string,
 			}),
-		),
-	}),
+		}),
+	),
 	createUser: PropTypes.func.isRequired,
 	isEditingID: PropTypes.string,
 	openModal: PropTypes.bool,
@@ -84,7 +81,6 @@ DisplayUserList.propTypes = {
 	onHandleDeleteClick: PropTypes.func.isRequired,
 	onHandleEditClick: PropTypes.func.isRequired,
 	onHandleResetEditClick: PropTypes.func.isRequired,
-	onUpdateUserList: PropTypes.func.isRequired,
 	updateUser: PropTypes.func.isRequired,
 };
 

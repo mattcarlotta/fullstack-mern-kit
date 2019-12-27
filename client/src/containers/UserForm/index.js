@@ -73,7 +73,7 @@ class UserForm extends Component {
 			return null;
 		}
 
-		const formProps = {
+		const props = {
 			email,
 			firstName,
 			lastName,
@@ -88,16 +88,8 @@ class UserForm extends Component {
 			},
 		};
 
-		this.props
-			.submitAction({ formProps, id })
-			.then(res => {
-				this.props.updateUserList(res.data.message);
-			})
-			.catch(err => {
-				this.setState({
-					error: err ? err.toString() : "Unable to create a new user!",
-				});
-			});
+		this.props.resetForm();
+		this.props.submitAction({ props, id });
 	};
 
 	render = () => (
@@ -167,9 +159,9 @@ UserForm.propTypes = {
 		state: PropTypes.string,
 		zipCode: PropTypes.string,
 	}),
+	resetForm: PropTypes.func,
 	cancelUpdate: PropTypes.func,
 	submitAction: PropTypes.func.isRequired,
-	updateUserList: PropTypes.func.isRequired,
 };
 
 export default UserForm;
