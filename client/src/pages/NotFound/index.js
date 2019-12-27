@@ -4,7 +4,7 @@ import Link from "@components/Link";
 import { notfound, notfoundContainer } from "./NotFound.module.scss";
 
 const NotFound = () => (
-	<div className={notfoundContainer}>
+	<div id="notfound-container" className={notfoundContainer}>
 		<Helmet title="Page Not Found" />
 		<div className={notfound}>
 			<h1>404 - Page Not Found!</h1>

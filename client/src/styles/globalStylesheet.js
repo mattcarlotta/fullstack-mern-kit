@@ -10,10 +10,7 @@ const GlobalStyle = createGlobalStyle`
   }
   #root, #app, body, html {
     height: 100%;
-  }
-  html,body {
-    height: 100%;
-    width: 100% !important;
+    width: 100%;
   }
   body {
     text-rendering: optimizeLegibility;

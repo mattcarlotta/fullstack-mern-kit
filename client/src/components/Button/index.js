@@ -24,6 +24,7 @@ export default styled(Button)`
 	text-decoration: none;
 	text-transform: uppercase;
 	outline: none;
+	border-radius: 4px;
 
 	&:hover {
 		text-decoration: none;

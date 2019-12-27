@@ -1,8 +1,6 @@
-import mongoose from "mongoose";
-import mongodbConnection from "@database";
 import User from "@models/user";
 import { updateUser } from "@controllers/user";
-import { mockRequest, mockResponse, newUser } from "../../__mocks__/helpers";
+import { newUser } from "../../__mocks__/helpers";
 
 const addUser = {
   ...newUser,
@@ -44,22 +42,23 @@ const emptybody = {
 };
 
 describe("Create User Controller", () => {
-  beforeAll(() => {
-    mongodbConnection();
-  });
-
   let res;
   beforeEach(() => {
     res = mockResponse();
   });
 
-  afterAll(async done => {
+  let db;
+  beforeAll(async () => {
+    db = connectDatabase();
+  });
+
+  afterAll(async () => {
     await User.deleteMany({});
-    mongoose.disconnect(done);
+    await db.close();
   });
 
   it("handles empty id params or empty body update requests", async () => {
-    const req = mockRequest(null, emptybody, null, { id: "" });
+    const req = mockRequest(null, null, emptybody, null, { id: "" });
 
     await updateUser(req, res);
     expect(res.status).toHaveBeenCalledWith(400);
@@ -69,7 +68,7 @@ describe("Create User Controller", () => {
   });
 
   it("handles invalid id params update requests", async () => {
-    const req = mockRequest(null, updatedUser, null, {
+    const req = mockRequest(null, null, updatedUser, null, {
       id: "5cb11f97d7cd972720377963"
     });
 
@@ -81,8 +80,8 @@ describe("Create User Controller", () => {
   });
 
   it("handles valid requests to update the user", async () => {
-    const user = await User.createUser(addUser);
-    const req = mockRequest(null, updatedUser, null, { id: user._id });
+    const user = await User.create(addUser);
+    const req = mockRequest(null, null, updatedUser, null, { id: user._id });
 
     await updateUser(req, res);
     expect(res.status).toHaveBeenCalledWith(201);
@@ -94,7 +93,7 @@ describe("Create User Controller", () => {
   it("handles invalid requests to update user details to one that already exists", async () => {
     await User.create(addUser2);
     const user2 = await User.create(addUser3);
-    const req = mockRequest(null, addUser2, null, { id: user2._id });
+    const req = mockRequest(null, null, addUser2, null, { id: user2._id });
 
     await updateUser(req, res);
 

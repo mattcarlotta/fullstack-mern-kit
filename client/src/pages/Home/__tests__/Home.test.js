@@ -1,8 +1,8 @@
-import App from "../index";
+import Home from "../index";
 
-const wrapper = mount(<App />);
+const wrapper = shallow(<Home />);
 
-describe("Root", () => {
+describe("Not Found Page", () => {
 	it("renders without errors", () => {
 		expect(wrapper.find("#home").exists()).toBeTruthy();
 	});

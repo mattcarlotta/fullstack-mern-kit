@@ -11,6 +11,7 @@ export default styled.div`
 	vertical-align: middle;
 	background-color: "#eee";
 	opacity: ${({ opacity }) => opacity || 0.25};
+	border-radius: 4px;
 	animation: pulse ${({ duration }) => duration || "2.5s"} infinite ease-in-out;
 
 	&:before {

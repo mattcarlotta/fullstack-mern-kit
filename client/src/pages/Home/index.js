@@ -11,7 +11,7 @@ import {
 } from "./Home.module.scss";
 
 const Home = () => (
-	<div className={homeContainer}>
+	<div id="home" className={homeContainer}>
 		<Helmet title="Home" />
 		<div className={logoContainer}>
 			<img className={logoStyle} src={logo} alt="mernLogo.png" />

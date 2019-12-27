@@ -1,7 +1,9 @@
 /* eslint-disable no-console */
 import "@env";
-import { connectDatabase } from "database";
+import { connectDatabase } from "@database";
 // import { User } from "models";
+
+const { SEED } = process.env;
 
 /**
  * Function to seed the testing Mongo database.

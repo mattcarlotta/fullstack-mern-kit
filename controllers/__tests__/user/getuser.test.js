@@ -1,9 +1,6 @@
-import mongoose from "mongoose";
-import { ObjectID } from "mongodb";
-import mongodbConnection from "@database";
 import User from "@models/user";
 import { getUsers } from "@controllers/user";
-import { mockRequest, mockResponse, newUser } from "../../__mocks__/helpers";
+import { newUser } from "../../__mocks__/helpers";
 
 const addUser = {
   ...newUser,
@@ -11,30 +8,22 @@ const addUser = {
 };
 
 describe("Get Users Controller", () => {
-  beforeAll(() => {
-    mongodbConnection();
-  });
-
   let res;
   beforeEach(() => {
     res = mockResponse();
   });
 
-  afterAll(async done => {
-    await User.deleteMany({});
-    mongoose.disconnect(done);
+  let db;
+  beforeAll(async () => {
+    db = connectDatabase();
   });
 
-  it("handles get users requests (empty db)", async () => {
-    const req = mockRequest();
-
-    await getUsers(req, res);
-    expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.send).toHaveBeenCalledWith({ users: [] });
+  afterAll(async () => {
+    await db.close();
   });
 
   it("handles get users requests (populated)", async () => {
-    await User.createUser(addUser);
+    await User.create(addUser);
     const req = mockRequest();
 
     await getUsers(req, res);
@@ -43,7 +32,7 @@ describe("Get Users Controller", () => {
       users: expect.arrayContaining([
         expect.objectContaining({
           __v: expect.any(Number),
-          _id: expect.any(ObjectID),
+          _id: expect.any(ObjectId),
           address: expect.objectContaining({
             city: expect.any(String),
             state: expect.any(String),

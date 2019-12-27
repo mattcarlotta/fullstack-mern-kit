@@ -1,5 +1,6 @@
 /* eslint-disable */
 import { connectDatabase } from "@database";
+
 const { DROPDB } = process.env;
 
 /**

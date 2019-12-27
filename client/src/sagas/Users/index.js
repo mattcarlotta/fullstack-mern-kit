@@ -2,7 +2,7 @@ import { all, put, call, takeLatest } from "redux-saga/effects";
 import app from "@utils/axiosConfig";
 import { parseData, parseMessage } from "@utils/parseResponse";
 import * as types from "@types";
-import * as actions from "@actions/Users";
+import { setUsers } from "@actions/Users";
 import toast from "@components/Toast";
 
 /**
@@ -20,9 +20,9 @@ export function* fetchUsers() {
 		const res = yield call(app.get, "users");
 		const data = yield call(parseData, res);
 
-		yield put(actions.setUsers(data));
+		yield put(setUsers(data));
 	} catch (e) {
-		yield call(toast({ type: "error", message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -38,15 +38,16 @@ export function* fetchUsers() {
  * @yields {action} - A redux action to refetch users.
  * @throws {action} - A toast error message.
  */
-export function* createUser(props) {
+export function* createUser({ props }) {
 	try {
 		const res = yield call(app.post, "users/create", props);
 		const message = yield call(parseMessage, res);
 
 		yield call(toast, { type: "success", message });
-		yield put(actions.fetchUsers());
+
+		yield call(fetchUsers);
 	} catch (e) {
-		yield call(toast({ type: "error", message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -69,9 +70,9 @@ export function* deleteUser({ id }) {
 
 		yield call(toast, { type: "success", message });
 
-		yield put(actions.fetchUsers());
+		yield call(fetchUsers);
 	} catch (e) {
-		yield call(toast({ type: "error", message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -81,15 +82,18 @@ export function* deleteUser({ id }) {
  * @generator
  * @function seedDB
  * @yields {object} - A response from a call to the API.
- * @yields {action} - A redux action to refetch users.
+ * @function parseData - returns a parsed res.data.
+ * @yields {action} -  A redux action to set users to redux state.
  * @throws {action} - A toast error message.
  */
 export function* seedDB() {
 	try {
-		yield call(app.post, "users/seed");
-		yield put(actions.fetchUsers());
+		const res = yield call(app.post, "users/seed");
+		const data = yield call(parseData, res);
+
+		yield put(setUsers(data));
 	} catch (e) {
-		yield call(toast({ type: "error", message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 
@@ -111,9 +115,10 @@ export function* updateUser({ props, id }) {
 		const message = yield call(parseMessage, res);
 
 		yield call(toast, { type: "info", message });
-		yield put(actions.fetchUsers());
+
+		yield call(fetchUsers);
 	} catch (e) {
-		yield call(toast({ type: "error", message: e.toString() }));
+		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
 

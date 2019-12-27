@@ -1,8 +1,6 @@
-import mongoose from "mongoose";
-import mongodbConnection from "@database";
 import User from "@models/user";
 import { createUser } from "@controllers/user";
-import { mockRequest, mockResponse, newUser } from "../../__mocks__/helpers";
+import { newUser } from "../../__mocks__/helpers";
 
 const addUser = {
   ...newUser,
@@ -24,23 +22,23 @@ const emptybody = {
 };
 
 describe("Create User Controller", () => {
-  beforeAll(async () => {
-    mongodbConnection();
-    await User.createUser(addUser2);
-  });
-
   let res;
   beforeEach(() => {
     res = mockResponse();
   });
 
-  afterAll(async done => {
-    await User.deleteMany({});
-    mongoose.disconnect(done);
+  let db;
+  beforeAll(async () => {
+    db = connectDatabase();
+    await User.create(addUser2);
+  });
+
+  afterAll(async () => {
+    await db.close();
   });
 
   it("handles empty body requests", async () => {
-    const req = mockRequest(null, emptybody);
+    const req = mockRequest(null, null, emptybody);
 
     await createUser(req, res);
     expect(res.status).toHaveBeenCalledWith(400);
@@ -50,7 +48,7 @@ describe("Create User Controller", () => {
   });
 
   it("handles valid requests to create a user", async () => {
-    const req = mockRequest(null, addUser);
+    const req = mockRequest(null, null, addUser);
 
     await createUser(req, res);
 
@@ -61,7 +59,7 @@ describe("Create User Controller", () => {
   });
 
   it("handles invalid requests to create a duplicate user", async () => {
-    const req = mockRequest(null, addUser2);
+    const req = mockRequest(null, null, addUser2);
 
     await createUser(req, res);
 

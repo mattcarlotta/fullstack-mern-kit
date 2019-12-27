@@ -1,9 +1,9 @@
-import app from "utils/setup";
-import { deleteUser } from "controllers/user";
+import app from "@utils/setup";
+import { deleteUser } from "@controllers/user";
 
 jest.mock("controllers/user", () => ({
   ...require.requireActual("controllers/user"),
-  deleteUser: jest.fn((req, res, done) => done()),
+  deleteUser: jest.fn((req, res, done) => done())
 }));
 
 describe("Delete A User Route", () => {

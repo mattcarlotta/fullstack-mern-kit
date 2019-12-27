@@ -6,7 +6,7 @@ import * as types from "@types";
  * @param {object} props - contain user props
  * @returns {object}
  */
-export const createUser = props => ({
+export const createUser = ({ props }) => ({
 	type: types.USERS_CREATE,
 	props,
 });

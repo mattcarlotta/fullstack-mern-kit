@@ -27,7 +27,7 @@ const createUser = async (req, res) => {
     const userNameTaken = await User.findOne({ userName });
     if (userNameTaken) throw "Error: That username is already in use!";
 
-    await User.createUser(req.body);
+    await User.create(req.body);
     res.status(201).json({ message: `Successfully created ${userName}.` });
   } catch (err) {
     return sendError(err, res);
@@ -36,13 +36,13 @@ const createUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   try {
-    const { id } = req.params;
-    if (!id) throw "Missing user delete id parameter.";
+    const { id: _id } = req.params;
+    if (!_id) throw "Missing user delete id parameter.";
 
-    const existingUser = await User.findById(id);
+    const existingUser = await User.findOne({ _id });
     if (!existingUser) throw "Unable to locate that user for deletion.";
 
-    await User.findByIdAndDelete(existingUser.id);
+    await existingUser.deleteOne();
 
     res
       .status(201)
@@ -53,15 +53,12 @@ const deleteUser = async (req, res) => {
 };
 
 const getUsers = async (_, res) => {
-  try {
-    const users = await User.find({});
+  const users = await User.find({});
 
-    res.status(200).send({ users });
-  } catch (err) {
-    return sendError(err, res);
-  }
+  res.status(200).send({ users });
 };
 
+/* istanbul ignore next */
 const seedDatabase = async (_, res) => {
   try {
     await User.deleteMany({});
@@ -83,6 +80,7 @@ const updateUser = async (req, res) => {
     const existingUser = await User.findOne({ _id });
     if (!existingUser) throw "Unable to locate that user to update.";
 
+    /* istanbul ignore next */
     if (existingUser.userName !== userName) {
       const userNameTaken = await User.findOne({ userName });
       if (userNameTaken) throw "Error: That username is already in use!";

@@ -1,8 +1,6 @@
-import mongoose from "mongoose";
-import mongodbConnection from "@database";
 import User from "@models/user";
 import { deleteUser } from "@controllers/user";
-import { mockRequest, mockResponse, newUser } from "../../__mocks__/helpers";
+import { newUser } from "../../__mocks__/helpers";
 
 const addUser = {
   ...newUser,
@@ -10,22 +8,22 @@ const addUser = {
 };
 
 describe("Delete User Controller", () => {
-  beforeAll(() => {
-    mongodbConnection();
-  });
-
   let res;
   beforeEach(() => {
     res = mockResponse();
   });
 
-  afterAll(async done => {
-    await User.deleteMany({});
-    mongoose.disconnect(done);
+  let db;
+  beforeAll(async () => {
+    db = connectDatabase();
+  });
+
+  afterAll(async () => {
+    await db.close();
   });
 
   it("handles missing id params requests", async () => {
-    const req = mockRequest(null, null, null, { id: "" });
+    const req = mockRequest(null, null, null, null, { id: "" });
 
     await deleteUser(req, res);
     expect(res.status).toHaveBeenCalledWith(400);
@@ -35,7 +33,7 @@ describe("Delete User Controller", () => {
   });
 
   it("handles invalid id params requests", async () => {
-    const req = mockRequest(null, null, null, {
+    const req = mockRequest(null, null, null, null, {
       id: "5cb11f97d7cd972720377962"
     });
 
@@ -47,8 +45,8 @@ describe("Delete User Controller", () => {
   });
 
   it("handles valid id params requests", async () => {
-    const user = await User.createUser(addUser);
-    const req = mockRequest(null, null, null, {
+    const user = await User.create(addUser);
+    const req = mockRequest(null, null, null, null, {
       id: user._id
     });
 
