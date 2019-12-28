@@ -18,6 +18,10 @@
 
 [Packages Incorporated](#packages-incorporated)
 
+[Client and API Integrations](#client-and-api-integrations)
+
+[Known Issues](#known-issues)
+
 ## Project Structure
 
 <details>
@@ -73,7 +77,7 @@
 ├── models
 ├── routes
 ├── server
-├── shared
+├── utils
 └── app.js
 </code></pre>
 </details>
@@ -102,9 +106,9 @@ git clone git@github.com:mattcarlotta/fullstack-mern-kit.git
 | `build`           | Compiles client application to a `client/dist` folder.                                 |
 | `checkbuild`      | Checks to see if the `client/dist` folder is ES5 compliant (for IE11).                 |
 | `lint`            | Lints all `.js` files.                                                                 |
-| `lint:back`       | Lint all of API's `.js` files.                                                         |
-| `lint:front`      | Lint all of client's `.js` files.                                                      |
-| `lint:styles`     | Lint all `.scss` files.                                                                |
+| `lint:back`       | Lints all of API's `.js` files.                                                        |
+| `lint:front`      | Lints all of client's `.js` files.                                                     |
+| `lint:styles`     | Lints all `.scss` files.                                                               |
 | `test`            | Runs `.test.js` files for the client and server.                                       |
 | `test:front`      | Runs `.test.js` files for the client only.                                             |
 | `test:frontcov`   | Runs `.test.js` files for the client with code coverage.                               |
@@ -163,13 +167,14 @@ If you wish to utilize the API:
 <pre><code>
 - controllers: express route controllers.
 - database: mongoose connection to local mongodb.
+- env: environment variables.
 - middlewares: express middlewares.
 - models: mongoose models for a local mongodb.
 - routes: express routes.
 - seeds: mongo seed file.
 - server: express configuration.
-- utils: configurations for starting the server and running a test environment.
-- app.js: API initialization configuration (registering babel for ES6 import/export syntax)
+- utils: configurations for running a test environment and misc. helper functions.
+- app.js: API initialization configuration (using babel-node for ES6 import/export syntax)
 </code></pre>
 </details>
 <br />
@@ -180,7 +185,7 @@ If you run into any issues, please fill out an issue report <a href="https://git
 
 ### Client
 
-Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/client/package.json#L106-L195">here</a> to see latest versions.
+Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/client/package.json#L106-L194">here</a> to see latest versions.
 
 <details>
 <summary>Click to expand brief overview of client packages</summary>
@@ -221,7 +226,7 @@ Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/cl
 
 ### API
 
-Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/package.json#L47-L82">here</a> to see latest versions.
+Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/package.json#L47-L81">here</a> to see latest versions.
 
 <details>
 <summary>Click to expand brief overview of API packages</summary>
@@ -242,3 +247,14 @@ Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/pa
 </code></pre>
 </details>
 <br />
+
+## Client and API Integrations
+
+By default, all root directories within the main application (with <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/babel.config.js#L4">exceptions</a>), as well as within the `client/src` folders are aliased (`@`). This means you can refer to the root directories by using the @ symbol followed by the folder name. For example, in the API: `@controllers`, refers to the `controllers` folder; or, for example, in the client: `@components` refers to the `components` folder within the `client/src` directory. This allows for rapid development when refering to reuseable components or functions as it eliminates the hassle of traversing the folder tree for relative pathing!
+
+Notes: This feature extends to new folders created within either the main or `client/src` directories. However, if you add a new root folder inside the `client/src` folder, then the client server needs to be restarted. By design, Client and API aliased folders are separated from each other; meaning, you can't refer to an API folder from within the client or vice-versa (in development, these are mutually exclusive entities running side-by-side and should remain that way).
+
+## Known Issues
+
+⚠️ A `react-helmet` dependency (`react-side-effect`) throws a deprecation warning about using `componentWillMount`.
+⚠️ Hot reloading with `react-toastify` is currently broken (submitted a <a href="https://github.com/fkhadra/react-toastify/issues/357#issuecomment-568145180">PR</a> to fix this issue).

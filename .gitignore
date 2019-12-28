@@ -16,6 +16,9 @@ prod.json
 logs
 *.log
 
+# vscode
+.vscode
+
 # Runtime data
 pids
 *.pid
