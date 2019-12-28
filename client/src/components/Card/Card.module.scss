@@ -39,11 +39,3 @@
 	color: #666;
 	margin: 0;
 }
-
-.userButtonsContainer {
-	float: right;
-
-	&::after {
-		@extend %clear-fix;
-	}
-}

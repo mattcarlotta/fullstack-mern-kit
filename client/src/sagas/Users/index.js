@@ -3,6 +3,7 @@ import app from "@utils/axiosConfig";
 import { parseData, parseMessage } from "@utils/parseResponse";
 import * as types from "@types";
 import { setUsers } from "@actions/Users";
+import { setError, setMessage } from "@actions/Server";
 import toast from "@components/Toast";
 
 /**
@@ -35,6 +36,7 @@ export function* fetchUsers() {
  * @yields {object} - A response from a call to the API.
  * @function parseMessage - returns a parsed res.data.message.
  * @yields {action} - A toast success message.
+ * @yields {action} - A redux action to set server message state.
  * @yields {action} - A redux action to refetch users.
  * @throws {action} - A toast error message.
  */
@@ -45,8 +47,11 @@ export function* createUser({ props }) {
 
 		yield call(toast, { type: "success", message });
 
+		yield put(setMessage(message));
+
 		yield call(fetchUsers);
 	} catch (e) {
+		yield put(setError(e.toString()));
 		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
@@ -60,6 +65,7 @@ export function* createUser({ props }) {
  * @yields {object} - A response from a call to the API.
  * @function parseMessage - returns a parsed res.data.message.
  * @yields {action} - A toast success message.
+ * @yields {action} - A redux action to set server message state.
  * @yields {action} - A redux action to refetch users.
  * @throws {action} - A toast error message.
  */
@@ -70,8 +76,11 @@ export function* deleteUser({ id }) {
 
 		yield call(toast, { type: "success", message });
 
+		yield put(setMessage(message));
+
 		yield call(fetchUsers);
 	} catch (e) {
+		yield put(setError(e.toString()));
 		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
@@ -106,7 +115,8 @@ export function* seedDB() {
  * @yields {object} - A response from a call to the API.
  * @function parseMessage - returns a parsed res.data.message.
  * @yields {action} - A redux action to display a server message by type.
- * @yields {action} - A redux action to push to sign the user out of any sessions.
+ * @yields {action} - A redux action to set server message state.
+ * @yields {action} - A redux action to fetch users.
  * @throws {action} - A redux action to display a server message by type.
  */
 export function* updateUser({ props, id }) {
@@ -116,8 +126,11 @@ export function* updateUser({ props, id }) {
 
 		yield call(toast, { type: "info", message });
 
+		yield put(setMessage(message));
+
 		yield call(fetchUsers);
 	} catch (e) {
+		yield put(setError(e.toString()));
 		yield call(toast, { type: "error", message: e.toString() });
 	}
 }

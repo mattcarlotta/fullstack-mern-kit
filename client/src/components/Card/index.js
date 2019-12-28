@@ -2,13 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import EditButton from "@components/EditButton";
 import DeleteButton from "@components/DeleteButton";
+import Flex from "@components/Flex";
+import FlexEnd from "@components/FlexEnd";
+import FlexStart from "@components/FlexStart";
 import Divider from "./Divider";
 import {
 	backgroundDetails,
 	emailDetails,
 	listDetails,
 	user,
-	userButtonsContainer,
 	userTitle,
 } from "./Card.module.scss";
 
@@ -23,11 +25,17 @@ const Card = ({
 	userName,
 }) => (
 	<>
-		<div className={userButtonsContainer}>
-			<EditButton id="edit-user" onClick={onEditClick} />
-			<DeleteButton id="delete-user" onClick={onDeleteClick} />
-		</div>
-		<h1 className={userTitle}>{userName}</h1>
+		<Flex>
+			<FlexStart>
+				<h1 className={userTitle}>{userName}</h1>
+			</FlexStart>
+
+			<FlexEnd>
+				<EditButton id="edit-user" onClick={onEditClick} />
+				<DeleteButton id="delete-user" onClick={onDeleteClick} />
+			</FlexEnd>
+		</Flex>
+
 		<p className={user}>
 			{firstName} {lastName}
 			<span className={emailDetails}>({email})</span>

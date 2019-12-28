@@ -13,6 +13,9 @@ const DisplayUserList = ({
 	onHandleDeleteClick,
 	onHandleEditClick,
 	onHandleResetEditClick,
+	resetMessage,
+	serverError,
+	serverMessage,
 	updateUser,
 }) => (
 	<>
@@ -30,9 +33,12 @@ const DisplayUserList = ({
 						<UserForm
 							{...props}
 							key={props._id}
+							resetMessage={resetMessage}
 							cancelUpdate={onHandleResetEditClick}
 							resetForm={onHandleCloseModal}
 							submitAction={updateUser}
+							serverError={serverError}
+							serverMessage={serverMessage}
 							isEditing
 						/>
 					)}
@@ -71,6 +77,9 @@ DisplayUserList.propTypes = {
 	onHandleDeleteClick: PropTypes.func.isRequired,
 	onHandleEditClick: PropTypes.func.isRequired,
 	onHandleResetEditClick: PropTypes.func.isRequired,
+	resetMessage: PropTypes.func.isRequired,
+	serverError: PropTypes.string,
+	serverMessage: PropTypes.string,
 	updateUser: PropTypes.func.isRequired,
 };
 

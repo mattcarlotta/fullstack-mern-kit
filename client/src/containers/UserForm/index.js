@@ -1,17 +1,14 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Button from "@components/Button";
 import FormError from "@components/FormError";
 import Input from "@components/Input";
 import TextArea from "@components/TextArea";
+import Flex from "@components/Flex";
+import FlexEnd from "@components/FlexEnd";
+import FlexStart from "@components/FlexStart";
 import fields from "./formFields";
-import {
-	cancelContainer,
-	formButtons,
-	formErrorStyle,
-	formContainer,
-	submitContainer,
-} from "./UserForm.module.scss";
+import { formErrorStyle, formContainer } from "./UserForm.module.scss";
 
 class UserForm extends Component {
 	constructor(props) {
@@ -33,9 +30,16 @@ class UserForm extends Component {
 		};
 	}
 
-	handleChange = ({ target: { name, value } }) => {
-		this.setState({ [name]: value });
+	componentDidUpdate = prevProps => {
+		const { serverMessage } = this.props;
+
+		if (serverMessage !== prevProps.serverMessage) this.props.resetForm();
 	};
+
+	componentWillUnmount = () => this.props.resetMessage();
+
+	handleChange = ({ target: { name, value } }) =>
+		this.setState({ [name]: value });
 
 	handleCloseError = () => this.setState({ error: "" });
 
@@ -52,6 +56,7 @@ class UserForm extends Component {
 			suite,
 			city,
 			zipCode,
+			submitted,
 		} = this.state;
 
 		const { _id: id } = this.props;
@@ -67,9 +72,7 @@ class UserForm extends Component {
 			!city ||
 			!zipCode
 		) {
-			if (!this.state.submitted) {
-				this.setState({ submitted: true });
-			}
+			if (!submitted) this.setState({ submitted: true });
 			return null;
 		}
 
@@ -88,12 +91,11 @@ class UserForm extends Component {
 			},
 		};
 
-		this.props.resetForm();
 		this.props.submitAction({ props, id });
 	};
 
 	render = () => (
-		<Fragment>
+		<>
 			<form
 				className={formContainer}
 				style={{ padding: this.props.isEditing ? 10 : 0 }}
@@ -119,28 +121,25 @@ class UserForm extends Component {
 					submitted={this.state.submitted}
 					isRequired
 				/>
-				<div className={formButtons}>
+				<Flex style={{ padding: "0 10px" }}>
 					{this.props.isEditing && (
-						<div className={cancelContainer}>
+						<FlexStart>
 							<Button danger type="button" onClick={this.props.cancelUpdate}>
 								Cancel
 							</Button>
-						</div>
+						</FlexStart>
 					)}
-					<div className={submitContainer}>
+					<FlexEnd>
 						<Button primary type="submit">
 							Submit
 						</Button>
-					</div>
-				</div>
+					</FlexEnd>
+				</Flex>
 			</form>
 			<div className={formErrorStyle}>
-				<FormError
-					hasError={this.state.error}
-					onHandleClose={this.handleCloseError}
-				/>
+				<FormError hasError={this.props.serverError} />
 			</div>
-		</Fragment>
+		</>
 	);
 }
 
@@ -159,6 +158,9 @@ UserForm.propTypes = {
 		state: PropTypes.string,
 		zipCode: PropTypes.string,
 	}),
+	resetMessage: PropTypes.func.isRequired,
+	serverError: PropTypes.string,
+	serverMessage: PropTypes.string,
 	resetForm: PropTypes.func,
 	cancelUpdate: PropTypes.func,
 	submitAction: PropTypes.func.isRequired,

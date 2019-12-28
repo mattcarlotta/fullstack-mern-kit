@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
     font-weight: normal;
     src: url(${PoppinsLight}) format('truetype');
   }
-  #root, #app, body, html {
+  #root, #app, html {
     height: 100%;
     width: 100%;
   }
@@ -18,6 +18,7 @@ const GlobalStyle = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
     margin: 0;
     font-family: "Poppins Light", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    min-height: 100vh;
   }
   @-webkit-keyframes wave {
     0% {

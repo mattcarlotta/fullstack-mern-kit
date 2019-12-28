@@ -14,7 +14,8 @@ import {
 	seedDB,
 	updateUser,
 } from "@actions/Users";
-import { usersContainer } from "./ShowUsers.module.scss";
+import { resetMessage } from "@actions/Server";
+import { preventScroll, usersContainer } from "./ShowUsers.module.scss";
 
 export class ShowUsers extends Component {
 	state = {
@@ -33,15 +34,20 @@ export class ShowUsers extends Component {
 	handleCloseModal = () => this.setState({ openModal: false, isEditingID: "" });
 
 	render = () => (
-		<div className={usersContainer}>
+		<div
+			className={`${usersContainer} ${
+				this.state.openModal ? preventScroll : ""
+			}`}
+		>
 			<Helmet title="Users" />
 			<UserListNavigation
 				openModal={this.handleOpenModal}
 				seedDB={this.props.seedDB}
 			/>
 			{this.state.openModal && (
-				<Modal closeModal={this.handleCloseModal} title="Create New User">
+				<Modal onClick={this.handleCloseModal} title="Create New User">
 					<UserForm
+						{...this.props}
 						submitAction={this.props.createUser}
 						resetForm={this.handleCloseModal}
 					/>
@@ -69,7 +75,10 @@ ShowUsers.propTypes = {
 	deleteUser: PropTypes.func.isRequired,
 	fetchUsers: PropTypes.func.isRequired,
 	seedDB: PropTypes.func.isRequired,
+	resetMessage: PropTypes.func.isRequired,
 	updateUser: PropTypes.func.isRequired,
+	serverError: PropTypes.string,
+	serverMessage: PropTypes.string,
 	data: PropTypes.arrayOf(
 		PropTypes.shape({
 			address: PropTypes.shape({
@@ -89,15 +98,18 @@ ShowUsers.propTypes = {
 	),
 };
 
-const mapStateToProps = ({ users }) => ({
+const mapStateToProps = ({ users, server }) => ({
 	data: users.data,
 	isLoading: users.isLoading,
+	serverError: server.error,
+	serverMessage: server.message,
 });
 
 const mapDispatchToProps = {
 	createUser,
 	deleteUser,
 	fetchUsers,
+	resetMessage,
 	seedDB,
 	updateUser,
 };
