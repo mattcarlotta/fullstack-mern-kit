@@ -121,7 +121,8 @@
 		"styled-components": "^4.4.1"
 	},
 	"resolutions": {
-		"babel-core": "7.0.0-bridge.0"
+		"babel-core": "7.0.0-bridge.0",
+		"react-helmet/react-side-effect": "2.1.0"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.7.5",
