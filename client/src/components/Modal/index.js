@@ -14,19 +14,13 @@ import ModalContainer from "./ModalContainer";
 import Title from "./Title";
 import WindowContainer from "./WindowContainer";
 
-export const Modal = ({
-	children,
-	disableClickHandler,
-	maxWidth,
-	onClick,
-	title,
-}) => (
+export const Modal = ({ children, maxWidth, onClick, title }) => (
 	<>
 		<BackgroundOverlay />
 		<WindowContainer>
 			<ModalContainer>
 				<Center maxWidth={maxWidth}>
-					<ClickHandler closeModal={!disableClickHandler ? onClick : null}>
+					<ClickHandler closeModal={onClick}>
 						<ModalContent maxWidth={maxWidth}>
 							<Flex
 								style={{ borderBottom: "1px solid #d3d3d3", padding: "2px 0" }}
@@ -55,7 +49,6 @@ export const Modal = ({
 
 Modal.propTypes = {
 	children: PropTypes.node.isRequired,
-	disableClickHandler: PropTypes.bool,
 	maxWidth: PropTypes.string,
 	onClick: PropTypes.func,
 	title: PropTypes.string,

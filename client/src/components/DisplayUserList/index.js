@@ -26,8 +26,8 @@ const DisplayUserList = ({
 						<Card
 							{...props}
 							key={props._id}
-							onEditClick={() => onHandleEditClick(props._id)}
-							onDeleteClick={() => onHandleDeleteClick(props._id)}
+							onEditClick={onHandleEditClick}
+							onDeleteClick={onHandleDeleteClick}
 						/>
 					) : (
 						<UserForm

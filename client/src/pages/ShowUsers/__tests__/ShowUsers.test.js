@@ -1,6 +1,6 @@
 import ShowUsersPage from "../index";
 
-const wrapper = shallow(<ShowUsersPage />);
+const wrapper = HOCWrap(ShowUsersPage);
 
 describe("Show Users Page", () => {
 	it("renders without errors", () => {

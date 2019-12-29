@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { createElement } from "react";
 import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router-dom";

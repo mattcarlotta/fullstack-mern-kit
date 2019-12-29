@@ -15,6 +15,7 @@ import {
 } from "./Card.module.scss";
 
 const Card = ({
+	_id,
 	address: { street, state, suite, city, zipCode },
 	backgroundInfo,
 	email,
@@ -31,11 +32,10 @@ const Card = ({
 			</FlexStart>
 
 			<FlexEnd>
-				<EditButton id="edit-user" onClick={onEditClick} />
-				<DeleteButton id="delete-user" onClick={onDeleteClick} />
+				<EditButton onClick={() => onEditClick(_id)} />
+				<DeleteButton onClick={() => onDeleteClick(_id)} />
 			</FlexEnd>
 		</Flex>
-
 		<p className={user}>
 			{firstName} {lastName}
 			<span className={emailDetails}>({email})</span>
@@ -62,6 +62,7 @@ const Card = ({
 );
 
 Card.propTypes = {
+	_id: PropTypes.string,
 	email: PropTypes.string,
 	backgroundInfo: PropTypes.string,
 	firstName: PropTypes.string,

@@ -1,12 +1,12 @@
 %clear-fix {
-  content: '';
-  display: table;
-  clear: both;
+	content: "";
+	display: table;
+	clear: both;
 }
 
 %centered {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
