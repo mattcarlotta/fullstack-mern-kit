@@ -11,7 +11,7 @@ export const initialState = {
  * @param {object} action - type and payload to be reduced.
  * @returns {object} - USERS state.
  */
-const memberReducer = (state = initialState, { payload, type }) => {
+const userReducer = (state = initialState, { payload, type }) => {
 	switch (type) {
 		case types.USERS_FETCH: {
 			return initialState;
@@ -29,4 +29,4 @@ const memberReducer = (state = initialState, { payload, type }) => {
 	}
 };
 
-export default memberReducer;
+export default userReducer;

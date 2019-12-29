@@ -1,6 +1,6 @@
 import * as types from "@types";
 
-const serverInitialState = {
+export const initialState = {
 	error: "",
 	message: "",
 };
@@ -11,10 +11,10 @@ const serverInitialState = {
  * @param {object} action - type and payload to be reduced.
  * @returns {object} - new server state.
  */
-const serverReducer = (state = serverInitialState, { payload, type }) => {
+const serverReducer = (state = initialState, { payload, type }) => {
 	switch (type) {
 		case types.RESET_SERVER_MESSAGES:
-			return serverInitialState;
+			return initialState;
 		case types.SERVER_ERROR:
 			return { ...state, error: payload };
 		case types.SERVER_MESSAGE:

@@ -24,7 +24,7 @@ const config = {
 Toast({ type: "info", message: "Welcome to the Fullstack M.E.R.N. Kit!" });
 
 const Routes = () => (
-	<div css="width: 100%; height:100%;">
+	<div id="routes" css="width: 100%; height:100%;">
 		<Helmet {...config} />
 		<GlobalStylesheet />
 		<ToastContainer

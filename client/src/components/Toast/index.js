@@ -9,7 +9,7 @@ import {
 	FaBug,
 } from "react-icons/fa";
 
-const displayIcon = type => {
+export const displayIcon = type => {
 	switch (type) {
 		case "success":
 			return <FaCheck />;
@@ -24,7 +24,7 @@ const displayIcon = type => {
 	}
 };
 
-const ToastInfo = ({ type, message }) =>
+const ToastMessage = ({ type, message }) =>
 	toast[type](
 		<div css="display: flex; color: white;">
 			<div css="font-size:15px;padding-top: 12px;flex-shrink: 0;text-align: center;width: 30px;">
@@ -34,9 +34,9 @@ const ToastInfo = ({ type, message }) =>
 		</div>,
 	);
 
-ToastInfo.propTypes = {
+ToastMessage.propTypes = {
 	message: PropTypes.string.isRequired,
 	type: PropTypes.string.isRequired,
 };
 
-export default ToastInfo;
+export default ToastMessage;

@@ -23,6 +23,7 @@ export function* fetchUsers() {
 
 		yield put(setUsers(data));
 	} catch (e) {
+		yield put(setError(e.toString()));
 		yield call(toast, { type: "error", message: e.toString() });
 	}
 }
@@ -102,6 +103,7 @@ export function* seedDB() {
 
 		yield put(setUsers(data));
 	} catch (e) {
+		yield put(setError(e.toString()));
 		yield call(toast, { type: "error", message: e.toString() });
 	}
 }

@@ -41,8 +41,6 @@ class UserForm extends Component {
 	handleChange = ({ target: { name, value } }) =>
 		this.setState({ [name]: value });
 
-	handleCloseError = () => this.setState({ error: "" });
-
 	handleSubmit = e => {
 		e.preventDefault();
 		const {
@@ -124,13 +122,18 @@ class UserForm extends Component {
 				<Flex style={{ padding: "0 10px" }}>
 					{this.props.isEditing && (
 						<FlexStart>
-							<Button danger type="button" onClick={this.props.cancelUpdate}>
+							<Button
+								id="cancel"
+								danger
+								type="button"
+								onClick={this.props.cancelUpdate}
+							>
 								Cancel
 							</Button>
 						</FlexStart>
 					)}
 					<FlexEnd>
-						<Button primary type="submit">
+						<Button id="submit" primary type="submit">
 							Submit
 						</Button>
 					</FlexEnd>
