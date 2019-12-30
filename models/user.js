@@ -11,18 +11,8 @@ const userSchema = new Schema({
     suite: String,
     city: String,
     state: String,
-    zipCode: String,
-  },
-});
-
-userSchema.statics.createUser = async function newUser(user) {
-  if (!user) throw new Error("User required!");
-
-  try {
-    return await this.create(user);
-  } catch (err) {
-    throw new Error(err);
+    zipCode: String
   }
-};
+});
 
 export default model("user", userSchema);

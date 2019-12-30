@@ -1,16 +1,13 @@
-import React from 'react';
-import Helmet from 'react-helmet';
-import Link from 'components/Link';
-import { notfound, notfoundContainer } from './styles.scss';
+import React from "react";
+import DynamicImport from "@components/DynamicImport";
 
-const NotFound = () => (
-  <div className={notfoundContainer}>
-    <Helmet title="Page Not Found" />
-    <div className={notfound}>
-      <h1>404 - Page Not Found!</h1>
-      <Link to="/">Go Back</Link>
-    </div>
-  </div>
+const ShowUsersPage = props => (
+	<DynamicImport
+		{...props}
+		loadFile={() =>
+			import(/*  webpackChunkName: "showusers" */ "@components/NotFound")
+		}
+	/>
 );
 
-export default NotFound;
+export default ShowUsersPage;

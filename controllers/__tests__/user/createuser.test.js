@@ -1,17 +1,15 @@
-import mongoose from "mongoose";
-import mongodbConnection from "database";
-import User from "models/user";
-import { createUser } from "controllers/user";
-import { mockRequest, mockResponse, newUser } from "../../__mocks__/helpers";
+import User from "@models/user";
+import { createUser } from "@controllers/user";
+import { newUser } from "../../__mocks__/helpers";
 
 const addUser = {
   ...newUser,
-  userName: "exampleuser4",
+  userName: "exampleuser4"
 };
 
 const addUser2 = {
   ...newUser,
-  userName: "duplicateuser",
+  userName: "duplicateuser"
 };
 
 const emptybody = {
@@ -20,54 +18,54 @@ const emptybody = {
   lastName: "",
   userName: "",
   backgroundInfo: "",
-  address: {},
+  address: {}
 };
 
 describe("Create User Controller", () => {
-  beforeAll(async () => {
-    mongodbConnection();
-    await User.createUser(addUser2);
-  });
-
   let res;
   beforeEach(() => {
     res = mockResponse();
   });
 
-  afterAll(async (done) => {
-    await User.deleteMany({});
-    mongoose.disconnect(done);
+  let db;
+  beforeAll(async () => {
+    db = connectDatabase();
+    await User.create(addUser2);
+  });
+
+  afterAll(async () => {
+    await db.close();
   });
 
   it("handles empty body requests", async () => {
-    const req = mockRequest(null, emptybody);
+    const req = mockRequest(null, null, emptybody);
 
     await createUser(req, res);
     expect(res.status).toHaveBeenCalledWith(400);
     expect(res.json).toHaveBeenCalledWith({
-      err: "Missing user card creation parameters.",
+      err: "Missing user card creation parameters."
     });
   });
 
   it("handles valid requests to create a user", async () => {
-    const req = mockRequest(null, addUser);
+    const req = mockRequest(null, null, addUser);
 
     await createUser(req, res);
 
     expect(res.status).toHaveBeenCalledWith(201);
     expect(res.json).toHaveBeenCalledWith({
-      message: `Successfully created ${req.body.userName}.`,
+      message: `Successfully created ${req.body.userName}.`
     });
   });
 
   it("handles invalid requests to create a duplicate user", async () => {
-    const req = mockRequest(null, addUser2);
+    const req = mockRequest(null, null, addUser2);
 
     await createUser(req, res);
 
     expect(res.status).toHaveBeenCalledWith(400);
     expect(res.json).toHaveBeenCalledWith({
-      err: "Error: That username is already in use!",
+      err: "Error: That username is already in use!"
     });
   });
 });

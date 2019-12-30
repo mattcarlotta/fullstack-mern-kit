@@ -9,24 +9,8 @@ const newUser = {
     suite: "Apt 1404",
     city: "Wankerton",
     state: "WI",
-    zipCode: "55555",
-  },
+    zipCode: "55555"
+  }
 };
 
-const mockRequest = (session, body, query, params) => ({
-  session,
-  body,
-  query,
-  params,
-});
-
-const mockResponse = () => {
-  const res = {};
-  res.clearCookie = jest.fn().mockReturnValue(res);
-  res.status = jest.fn().mockReturnValue(res);
-  res.json = jest.fn().mockReturnValue(res);
-  res.send = jest.fn().mockReturnValue(res);
-  return res;
-};
-
-export { mockRequest, mockResponse, newUser };
+export { newUser };

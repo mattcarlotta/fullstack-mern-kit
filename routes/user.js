@@ -3,10 +3,10 @@ import {
   deleteUser,
   getUsers,
   seedDatabase,
-  updateUser,
-} from "controllers/user";
+  updateUser
+} from "@controllers/user";
 
-module.exports = (app) => {
+export default app => {
   app.get("/api/users", getUsers);
   app.post("/api/users/create", createUser);
   app.put("/api/users/update/:id", updateUser);

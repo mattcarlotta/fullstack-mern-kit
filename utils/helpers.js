@@ -1,8 +1,4 @@
-/* eslint-disable */
-const sendError = (err, res, done) => {
-  return res.status(400).json({ err: err.toString() });
-  done();
-};
+const currentDirectory = process.cwd();
+const sendError = (err, res) => res.status(400).json({ err: err.toString() });
 
-export { sendError };
-/* eslint-enable */
+export { currentDirectory, sendError };

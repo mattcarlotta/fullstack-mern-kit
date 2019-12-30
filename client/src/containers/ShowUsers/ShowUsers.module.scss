@@ -1,0 +1,13 @@
+@import "../../styles/styles.scss";
+
+.preventScroll {
+	overflow: hidden;
+	width: 100%;
+}
+
+.usersContainer {
+	width: 100%;
+	min-height: 100vh;
+	background: $black;
+	text-align: center;
+}

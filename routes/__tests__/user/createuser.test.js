@@ -1,9 +1,9 @@
-import app from "utils/setup";
-import { createUser } from "controllers/user";
+import app from "@utils/setup";
+import { createUser } from "@controllers/user";
 
 jest.mock("controllers/user", () => ({
   ...require.requireActual("controllers/user"),
-  createUser: jest.fn((req, res, done) => done()),
+  createUser: jest.fn((req, res, done) => done())
 }));
 
 describe("Create A User Route", () => {

@@ -1,8 +1,9 @@
-import { JSDOM } from 'jsdom';
-import { configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import { createStoreFactory, mountWrap, shallowWrap } from 'utils';
-import mockAxios from 'utils/__mocks__/mockAxios.js';
+import { JSDOM } from "jsdom";
+import { configure, mount } from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import { HOCWrap, shallowWrap } from "@utils/testing";
+import mockApp from "@utils/__mocks__/mockAxios.js";
+import "jest-styled-components";
 
 configure({ adapter: new Adapter() });
 
@@ -15,30 +16,30 @@ WARNING: Due to the below being accessible to the global DOM,
          imported! See "overrides" in ".eslintrc" for more
          information.
 */
-const exposedProperties = ['window', 'navigator', 'document'];
-const { document } = new JSDOM('').window;
+const exposedProperties = ["window", "navigator", "document"];
+const { document } = new JSDOM("").window;
 global.document = document;
 global.window = document.defaultView;
 global.HTMLElement = window.HTMLElement;
 global.HTMLAnchorElement = window.HTMLAnchorElement;
-global.createStoreFactory = createStoreFactory;
+global.HOCWrap = HOCWrap;
 global.shallow = shallowWrap;
-global.mount = mountWrap;
-global.mockAxios = mockAxios;
-global.React = require('react');
-global.Provider = require('react-redux').Provider;
-global.ConnectedRouter = require('connected-react-router').ConnectedRouter;
-global.Router = require('react-router').Router;
-global.Route = require('react-router-dom').Route;
-global.Switch = require('react-router-dom').Switch;
+global.mount = mount;
+global.mockApp = mockApp;
+global.React = require("react");
+global.Provider = require("react-redux").Provider;
+global.ConnectedRouter = require("connected-react-router").ConnectedRouter;
+global.Router = require("react-router").MemoryRouter;
+global.Route = require("react-router-dom").Route;
+global.Switch = require("react-router-dom").Switch;
 
 Object.keys(document.defaultView).forEach(property => {
-  if (typeof global[property] === 'undefined') {
-    exposedProperties.push(property);
-    global[property] = document.defaultView[property];
-  }
+	if (typeof global[property] === "undefined") {
+		exposedProperties.push(property);
+		global[property] = document.defaultView[property];
+	}
 });
 
 global.navigator = {
-  userAgent: 'node.js',
+	userAgent: "node.js",
 };

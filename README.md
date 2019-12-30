@@ -18,6 +18,10 @@
 
 [Packages Incorporated](#packages-incorporated)
 
+[Client and API Integrations](#client-and-api-integrations)
+
+[Known Issues](#known-issues)
+
 ## Project Structure
 
 <details>
@@ -50,6 +54,7 @@
 |   |   └── index.html
 |   |
 |   ├── src
+|   |   ├── actions
 |   |   ├── components
 |   |   ├── containers
 |   |   ├── images
@@ -57,7 +62,7 @@
 |   |   ├── reducers
 |   |   ├── root
 |   |   ├── routes
-|   |   ├── store
+|   |   ├── sagas
 |   |   ├── styles
 |   |   ├── types
 |   |   ├── utils
@@ -67,11 +72,12 @@
 |
 ├── controllers
 ├── database
+├── env
 ├── middlewares
 ├── models
 ├── routes
 ├── server
-├── shared
+├── utils
 └── app.js
 </code></pre>
 </details>
@@ -91,18 +97,30 @@ git clone git@github.com:mattcarlotta/fullstack-mern-kit.git
 
 ## Commands
 
-| `yarn <command>` | Description                                                              |
-| ---------------- | ------------------------------------------------------------------------ |
-| `dev`            | Starts both servers (client: `localhost:3000`, API: `localhost:5000`).   |
-| `initialize`     | Installs dependencies for client and API servers.                        |
-| `start`          | Starts a production server at `localhost:8080` (must run `build` first). |
-| `build`          | Compiles client application to a `client/dist` folder.                   |
-| `lint`           | Lints all `.js` files.                                                   |
-| `lint:back`      | Lint all of API's `.js` files.                                           |
-| `lint:front`     | Lint all of client's `.js` files.                                        |
-| `lint:styles`    | Lint all `.scss` files.                                                  |
-| `test`           | Runs and watches all `.test.js` files for the server.                    |
-| `test:front`     | Runs and watches all `.test.js` files for the client.                    |
+| `yarn <command>`  | Description                                                                               |
+| ----------------- | ----------------------------------------------------------------------------------------- |
+| `dev`             | Starts both servers (client: `localhost:3000`, API: `localhost:5000`).                    |
+| `initialize`      | Installs dependencies for client and API servers.                                         |
+| `start`           | Starts a production server at `localhost:8080` (must run `build` and `compile` first).†   |
+| `compile`         | Compiles server application to a `build` folder.                                          |
+| `build`           | Compiles client application to a `client/dist` folder.                                    |
+| `stage`           | Compiles client application to a `client/dist` folder for staging.                        |
+| `staging`         | Starts a local staging server at `localhost:8080` (must run `stage` and `compile` first). |
+| `analyze`         | Compiles client application to a `client/dist` folder and spawns a distribution chart.    |
+| `checkbuild`      | Checks to see if the `client/dist` folder is ES5 compliant (for IE11).                    |
+| `lint`            | Lints all `.js` files.                                                                    |
+| `lint:back`       | Lints all of API's `.js` files.                                                           |
+| `lint:front`      | Lints all of client's `.js` files.                                                        |
+| `lint:styles`     | Lints all `.scss` files.                                                                  |
+| `test`            | Runs `.test.js` files for the client and server.                                          |
+| `test:front`      | Runs `.test.js` files for the client only.                                                |
+| `test:frontcov`   | Runs `.test.js` files for the client with code coverage.                                  |
+| `test:frontwatch` | Runs and watches `.test.js` files for the client.                                         |
+| `test:back`       | Runs `.test.js` files for the server only.                                                |
+| `test:backcov`    | Runs `.test.js` files for the server with code coverage.                                  |
+| `test:backwatch`  | Runs and watches `.test.js` files for the server.                                         |
+
+† Note: Before running this command, you must edit the <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/updated/client/config/envs.js#L11-L14">client/config/envs.js</a> file and update the `baseUrl` from `https://example.com/api/` to include your remote server address!
 
 ## Example API
 
@@ -136,12 +154,12 @@ If you wish to utilize the API:
 - client/src/utils/setup/setupTest.js: enzyme test setup for your React components.
 - client/src/utils/axiosConfig.js: custom axios configuration.
 - client/src/utils/index.js: custom test functions.
-- client/.babelrc: babel config for react js files.
-- client/.browserslistrc: browsers list config.
+- client/.browserslistrc: browsers list config (for babel transpiling).
 - client/.eslintignore: eslint config for ignoring scss files.
 - client/.eslintrc: eslint config for linting js files.
 - client/.prettierc: prettier config.
 - client/.stylelintrc.json: stylelint config for linting scss files.
+- client/babel.config.js: babel config for react js files.
 - client/jest.json: jest config.
 </code></pre>
 </details>
@@ -154,24 +172,23 @@ If you wish to utilize the API:
 <pre><code>
 - controllers: express route controllers.
 - database: mongoose connection to local mongodb.
+- env: environment variables.
 - middlewares: express middlewares.
 - models: mongoose models for a local mongodb.
 - routes: express routes.
 - seeds: mongo seed file.
 - server: express configuration.
-- utils: configurations for starting the server and running a test environment.
-- app.js: API initialization configuration (registering babel for ES6 import/export syntax)
+- utils: configurations for running a test environment and misc. helper functions.
+- app.js: API initialization configuration (using babel-node for ES6 import/export syntax)
 </code></pre>
 </details>
 <br />
 
 ## Packages Incorporated
 
-If you run into any issues, please fill out an issue report <a href="https://github.com/mattcarlotta/fullstack-mern-kit/issues">here</a>.
-
 ### Client
 
-Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/client/package.json#L70-L160">here</a> to see latest versions.
+Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/client/package.json#L106-L195">here</a> to see latest versions.
 
 <details>
 <summary>Click to expand brief overview of client packages</summary>
@@ -183,7 +200,6 @@ Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/cl
 - <a href="https://github.com/eslint/eslint/">Eslint</a>
 - <a href="http://airbnb.io/enzyme/">Enzyme</a>
 - <a href="https://github.com/smooth-code/error-overlay-webpack-plugin">Error Overlay Webpack Plugin</a>
-- <a href="https://github.com/expressjs/express">Express</a>
 - <a href="https://github.com/geowarin/friendly-errors-webpack-plugin">Friendly Errors Webpack Plugin</a>
 - <a href="https://github.com/ReactTraining/history">History</a>
 - <a href="https://github.com/typicode/husky">Husky</a>
@@ -197,8 +213,7 @@ Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/cl
 - <a href="https://github.com/ReactTraining/react-router/tree/master/packages/react-router-dom">React Router Dom</a>
 - <a href="https://github.com/reduxjs/redux">Redux</a>
 - <a href="https://github.com/zalmoxisus/redux-devtools-extension">Redux DevTools Extension</a>
-- <a href="https://redux-form.com/">Redux Form</a>
-- <a href="https://github.com/reduxjs/redux-thunk">Redux Thunk</a>
+- <a href="https://redux-saga.js.org/">Redux Saga</a>
 - <a href="https://github.com/webpack-contrib/sass-loader">Sass Loader</a>
 - <a href="https://stylelint.io/">Stylelint</a>
 - <a href="https://github.com/kristerkari/stylelint-scss">Stylelint-SCSS</a>
@@ -214,18 +229,19 @@ Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/cl
 
 ### API
 
-Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/package.json#L78-L111">here</a> to see latest versions.
+Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/package.json#L47-L81">here</a> to see latest versions.
 
 <details>
 <summary>Click to expand brief overview of API packages</summary>
 <pre><code>
 - <a href="https://github.com/petkaantonov/bluebird">Bluebird</a>
 - <a href="https://github.com/expressjs/body-parser">Body Parser</a>
+- <a href="https://github.com/expressjs/compression">Compression</a>
 - <a href="https://github.com/kimmobrunfeldt/concurrently">Concurrently</a>
 - <a href="https://github.com/jarradseers/consign">Consign</a>
 - <a href="https://github.com/expressjs/cors">CORS</a>
 - <a href="http://expressjs.com/">Express</a>
-- <a href="http://momentjs.com/">Moment</a>
+- <a href="hhttps://momentjs.com/timezone/">Moment Timezone</a>
 - <a href="https://mongoosejs.com/">Mongoose</a>
 - <a href="https://github.com/expressjs/morgan">Morgan</a>
 - <a href="http://www.passportjs.org/">Passport</a>
@@ -234,3 +250,17 @@ Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/pa
 </code></pre>
 </details>
 <br />
+
+## Client and API Integrations
+
+By default, all root directories within the main application (with <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/babel.config.js#L4">exceptions</a>), as well as within the `client/src` folders are aliased (`@`). This means you can refer to the root directories by using the @ symbol followed by the folder name. For example, in the API: `@controllers`, refers to the `controllers` folder; or, for example, in the client: `@components` refers to the `components` folder within the `client/src` directory. This allows for rapid development when refering to reuseable components or functions as it eliminates the hassle of traversing the folder tree for relative pathing!
+
+Notes: This feature extends to new folders created within either the main or `client/src` directories. However, if you add a new root folder inside the `client/src` folder, then the client server needs to be restarted. By design, Client and API aliased folders are separated from each other; meaning, you can't refer to an API folder from within the client or vice-versa (in development, these are mutually exclusive entities running side-by-side and should remain that way).
+
+## Known Issues
+
+If you run into any issues, please fill out an issue report <a href="https://github.com/mattcarlotta/fullstack-mern-kit/issues">here</a>.
+
+⚠️ A `react-helmet` dependency (`react-side-effect`) throws a deprecation warning about using `componentWillMount`, see issue tracker <a href="https://github.com/nfl/react-helmet/issues/426">here</a>. The current fix is to force `react-helmet` to use v2.1.0 of `react-side-effect`. See fix <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/client/package.json#L125">here</a>.
+
+⚠️ Hot reloading with `react-toastify` is currently broken (submitted a <a href="https://github.com/fkhadra/react-toastify/issues/357#issuecomment-568145180">PR</a> to fix this issue).

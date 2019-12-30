@@ -1,0 +1,16 @@
+@import "../../styles/styles.scss";
+
+.formContainer {
+	margin: 0 auto;
+	text-align: left;
+
+	&::after {
+		content: "";
+		display: block;
+		clear: both;
+	}
+}
+
+.formErrorStyle {
+	padding: 0 10px;
+}

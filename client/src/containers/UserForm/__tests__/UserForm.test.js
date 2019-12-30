@@ -1,126 +1,124 @@
-import UserForm from '../index';
-import {
-  mockCancelUpdate,
-  mockCreateUser,
-  mockErrorMessage,
-  mockSuccessMessage,
-  mockUpdateUserList,
-} from '../__mocks__/UserForm.mocks';
+import UserForm from "../index";
 
-const initialProps = {
-  _id: '',
-  isEditing: false,
-  email: '',
-  backgroundInfo: '',
-  firstName: '',
-  lastName: '',
-  userName: '',
-  address: {
-    street: '',
-    suite: '',
-    city: '',
-    state: '',
-    zipCode: '',
-  },
-  cancelUpdate: mockCancelUpdate,
-  submitAction: () => mockCreateUser('success'),
-  updateUserList: mockUpdateUserList,
+const data = {
+	email: "test@test.com",
+	firstName: "Bob",
+	lastName: "Dole",
+	userName: "Bob Dole",
+	backgroundInfo: "Cool.",
+	address: {
+		street: "123 Galena St.",
+		state: "GA",
+		suite: "",
+		city: "Atlanta",
+		zipCode: "55555",
+	},
 };
 
-const initialState = {
-  error: '',
-  email: '',
-  firstName: '',
-  lastName: '',
-  userName: '',
-  backgroundInfo: '',
-  street: '',
-  state: '',
-  suite: '',
-  city: '',
-  zipCode: '',
-  submitted: false,
+const filledFields = {
+	email: "test@test.com",
+	firstName: "Bob",
+	lastName: "Dole",
+	userName: "Bob Dole",
+	backgroundInfo: "Cool.",
+	street: "123 Galena St.",
+	state: "GA",
+	suite: "",
+	city: "Atlanta",
+	zipCode: "55555",
 };
 
-const nextState = {
-  email: 'test@test.com',
-  firstName: 'Test',
-  lastName: 'Test',
-  userName: 'Test',
-  backgroundInfo: 'Test',
-  street: 'Test',
-  state: 'Test',
-  suite: '',
-  city: 'Test',
-  zipCode: 'Test',
+const cancelUpdate = jest.fn();
+const submitAction = jest.fn();
+const resetForm = jest.fn();
+const resetMessage = jest.fn();
+
+const initProps = {
+	_id: "",
+	isEditing: false,
+	cancelUpdate,
+	submitAction,
+	resetForm,
+	resetMessage,
+	serverError: "",
+	serverMessage: "",
 };
 
-describe('Create/Edit User Form', () => {
-  let wrapper;
-  beforeEach(() => {
-    mockAxios.reset();
-    wrapper = mount(<UserForm {...initialProps} />, initialState);
-  });
+describe("User Form Container", () => {
+	let wrapper;
+	beforeEach(() => {
+		wrapper = mount(<UserForm {...initProps} />);
+	});
 
-  afterEach(() => {
-    mockAxios.restore();
-  });
+	afterEach(() => {
+		cancelUpdate.mockClear();
+		submitAction.mockClear();
+		resetForm.mockClear();
+		resetMessage.mockClear();
+	});
 
-  it('renders a form', () => {
-    expect(wrapper.find('form.formContainer')).toHaveLength(1);
-  });
+	it("renders without errors", () => {
+		expect(wrapper.find("form").exists()).toBeTruthy();
+	});
 
-  it('submits the form if required fields are filled in', async () => {
-    wrapper.setState({ ...nextState });
-    wrapper.find('form').simulate('submit');
-    await Promise.resolve();
-    expect(mockCreateUser).toHaveBeenCalled();
-    expect(mockUpdateUserList).toHaveBeenCalledWith(
-      mockSuccessMessage.data.message,
-    );
-  });
+	it("calls 'handleChange' to update form fields", () => {
+		const name = "userName";
+		const value = "bobdole";
+		wrapper
+			.find("input#userName")
+			.simulate("change", { target: { name, value } });
 
-  it('displays a field error if a field is empty when sumbitted', () => {
-    wrapper.find('form').simulate('submit');
-    expect(wrapper.find('span.errorStyle').length).toBe(9);
-  });
+		expect(wrapper.state("userName")).toEqual(value);
+	});
 
-  describe('if editing', () => {
-    beforeEach(() => {
-      wrapper.setProps({ isEditing: true });
-    });
+	it("seeds fields with props data and exposes a cancel button", () => {
+		wrapper = mount(<UserForm {...initProps} {...data} isEditing />);
 
-    it('displays a Cancel button', () => {
-      expect(wrapper.find('div.cancelContainer')).toHaveLength(1);
-    });
+		expect(wrapper.find("form").props().style).toEqual({ padding: 10 });
 
-    it('closes the form if the Cancel button is clicked', () => {
-      wrapper
-        .find('div.cancelContainer')
-        .find('button')
-        .simulate('click');
-      expect(mockCancelUpdate).toHaveBeenCalled();
-    });
-  });
+		expect(wrapper.find("input#userName").props().value).toEqual(data.userName);
 
-  describe('displays a form error dialog box if API call fails', () => {
-    beforeEach(async () => {
-      wrapper.setState({ ...nextState });
-      wrapper.setProps({ submitAction: () => mockCreateUser() });
-      wrapper.find('form').simulate('submit');
-      await Promise.resolve();
-    });
+		const cancelButton = wrapper.find("button#cancel");
+		expect(cancelButton.exists()).toBeTruthy();
 
-    it('renders', () => {
-      wrapper.update();
-      expect(wrapper.find('div.errorContainer')).toHaveLength(1);
-      expect(wrapper.find('p.errorStyle').text()).toContain(mockErrorMessage);
-    });
+		cancelButton.simulate("click");
 
-    it('closes', () => {
-      wrapper.update();
-      wrapper.find('button.closeButton').simulate('click');
-      expect(wrapper.find('div.errorContainer')).toHaveLength(0);
-    });
-  });
+		expect(cancelUpdate).toHaveBeenCalledTimes(1);
+	});
+
+	it("displays errors when a form is submitted with empty fields", () => {
+		wrapper.find("form").simulate("submit");
+
+		expect(wrapper.find("span.errorStyle")).toHaveLength(9);
+		expect(wrapper.state("submitted")).toBeTruthy();
+
+		wrapper.find("form").simulate("submit");
+		expect(submitAction).toHaveBeenCalledTimes(0);
+	});
+
+	it("handles valid form submissions", () => {
+		wrapper.setState({ ...filledFields });
+		wrapper.find("form").simulate("submit");
+
+		expect(submitAction).toHaveBeenCalledWith({ props: data, id: "" });
+	});
+
+	it("displays an API error", () => {
+		const serverError = "Network Error";
+		wrapper.setProps({ serverError });
+
+		expect(wrapper.find("p.errorStyle").text()).toEqual(serverError);
+	});
+
+	it("calls 'resetForm' if an API success message is set", () => {
+		wrapper.setProps({ serverMessage: "Successfully added a user!" });
+
+		expect(resetForm).toHaveBeenCalledTimes(1);
+	});
+
+	it("calls 'resetMessage' when the form is unmounted", () => {
+		wrapper.unmount();
+
+		expect(resetMessage).toHaveBeenCalledTimes(1);
+	});
 });

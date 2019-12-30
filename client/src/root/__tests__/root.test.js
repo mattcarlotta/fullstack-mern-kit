@@ -1,10 +1,9 @@
-import App from '../index.js';
+import Root from "../index";
 
-describe('App', () => {
-  const wrapper = mount(<App />);
+const wrapper = mount(<Root />);
 
-  it('renders without errors', () => {
-    const homeComponent = wrapper.find('.homeContainer');
-    expect(homeComponent).toHaveLength(1);
-  });
+describe("Root", () => {
+	it("renders without errors", () => {
+		expect(wrapper.find("div#routes").exists()).toBeTruthy();
+	});
 });

@@ -1,10 +1,9 @@
-import NotFound from '../index';
+import NotFound from "../index";
 
-describe('NotFound', () => {
-  const wrapper = shallow(<NotFound />);
+const wrapper = HOCWrap(NotFound);
 
-  it('renders without errors', () => {
-    const notFoundComponent = wrapper.find('.notfoundContainer');
-    expect(notFoundComponent).toHaveLength(1);
-  });
+describe("Not Found Page", () => {
+	it("renders without errors", () => {
+		expect(wrapper.find("Spinner").exists()).toBeTruthy();
+	});
 });

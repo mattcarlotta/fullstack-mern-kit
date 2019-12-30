@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 export default [
   {
     email: "example1@example.com",
@@ -11,8 +12,8 @@ export default [
       suite: "",
       city: "Victoria Valley",
       state: "CA",
-      zipCode: "55555",
-    },
+      zipCode: "55555"
+    }
   },
   {
     email: "example2@example.com",
@@ -26,8 +27,8 @@ export default [
       suite: "",
       city: "Blank Hills",
       state: "MI",
-      zipCode: "55555",
-    },
+      zipCode: "55555"
+    }
   },
   {
     email: "example3@example.com",
@@ -41,7 +42,7 @@ export default [
       suite: "Apt 1202",
       city: "Mintville",
       state: "WA",
-      zipCode: "55555",
-    },
-  },
+      zipCode: "55555"
+    }
+  }
 ];

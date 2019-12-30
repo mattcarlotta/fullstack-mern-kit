@@ -1,6 +1,6 @@
 {
   "name": "mern-starter-kit",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "main": "app.js",
   "description": "A fullstack MERN boilerplate.",
   "repository": "https://github.com/mattcarlotta/fullstack-mern-kit",
@@ -8,105 +8,79 @@
   "license": "MIT",
   "private": false,
   "engines": {
-    "node": ">=8",
-    "npm": ">=3"
+    "node": ">=10",
+    "npm": ">=6"
   },
   "scripts": {
-    "dev": "better-npm-run dev",
+    "checkbuild": "npm run checkbuild --prefix client",
+    "compile": "rimraf build && babel ./ -d build --no-comments --ignore node_modules,client,**/__tests__,coverage,setupTests.js,**/__mocks__",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "initialize": "yarn install && cd client && yarn install && cd ..",
-    "start": "better-npm-run start",
-    "server": "better-npm-run server",
+    "start": "NODE_ENV=production node ./build/app.js",
+    "server": "NODE_ENV=development nodemon --exec babel-node ./app.js",
+    "staging": "NODE_ENV=stage node ./build/app.js",
+    "stage": "npm run stage --prefix client",
     "client": "npm run dev --prefix client",
     "build": "npm run build --prefix client",
-    "lint": "npm run lint-front --silent && npm run lint-back --silent",
+    "analyze": "npm run analyze --prefix client",
+    "lint": "npm run lint:front --silent && npm run lint:back --silent",
     "lint:front": "npm run pre-commit --prefix client",
     "lint:back": "lint-staged",
-    "test": "better-npm-run test",
-    "test:front": "npm run test --prefix client"
-  },
-  "betterScripts": {
-    "dev": {
-      "command": "concurrently \"better-npm-run server\" \"npm run client\"",
-      "env": {
-        "HOST": "http://localhost:",
-        "CLIENT": "http://localhost:3000",
-        "DATABASE": "mongodb://localhost/boilerplate-dev-db",
-        "NODE_ENV": "development",
-        "APIPORT": 5000
-      }
-    },
-    "start": {
-      "command": "node app.js",
-      "env": {
-        "HOST": "http://localhost:",
-        "CLIENT": "http://example.com",
-        "DATABASE": "mongodb://localhost/boilerplate-prod-db",
-        "NODE_ENV": "production",
-        "APIPORT": 8080
-      }
-    },
-    "server": {
-      "command": "nodemon ./app.js",
-      "env": {
-        "DATABASE": "mongodb://localhost/boilerplate-dev-db",
-        "NODE_ENV": "development",
-        "APIPORT": 5000
-      }
-    },
-    "test": {
-      "command": "jest --config ./jest.json --runInBand --watchAll",
-      "env": {
-        "CLIENT": "http://localhost:5001",
-        "DATABASE": "mongodb://localhost/boilerplate-test-db",
-        "NODE_ENV": "test",
-        "APIPORT": 5001
-      }
-    }
+    "pre-commit": "npm run lint && npm run test",
+    "test": "npm run test:back && npm run test:front",
+    "test:back": "NODE_ENV=test jest --config ./jest.json",
+    "test:backcov": "NODE_ENV=test jest --config ./jest.json --coverage",
+    "test:backwatch": "NODE_ENV=test jest --config ./jest.json --passWithNoTests --watchAll",
+    "test:front": "npm run test --prefix client",
+    "test:frontcov": "npm run test:coverage --prefix client",
+    "test:frontwatch": "npm run test:watch --prefix client",
+    "test:frontwatchall": "npm run test:watchall --prefix client"
   },
   "lint-staged": {
     "*.js": [
       "eslint --fix",
-      "cross-env NODE_ENV=test DATABASE=mongodb://localhost/boilerplate-test-db jest --config ./jest.json --runInBand --bail --findRelatedTests",
       "git add"
     ]
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint:front --silent && npm run lint:back --silent"
+      "pre-commit": "npm run pre-commit"
     }
   },
   "dependencies": {
-    "@babel/core": "^7.4.3",
-    "@babel/preset-env": "^7.4.3",
-    "@babel/register": "^7.4.0",
-    "babel-plugin-module-resolver": "^3.2.0",
-    "better-npm-run": "^0.1.1",
-    "bluebird": "^3.5.3",
-    "body-parser": "^1.18.3",
-    "concurrently": "^4.1.0",
+    "bluebird": "^3.7.2",
+    "body-parser": "^1.19.0",
+    "chalk": "^3.0.0",
+    "compression": "^1.7.4",
+    "concurrently": "^5.0.2",
     "cors": "^2.8.5",
-    "express": "^4.16.4",
-    "lodash": "^4.17.11",
-    "moment": "^2.24.0",
-    "mongoose": "^5.4.15",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "lodash": "^4.17.15",
+    "moment-timezone": "^0.5.27",
+    "mongoose": "^5.8.3",
     "morgan": "^1.9.1",
-    "passport": "^0.4.0",
+    "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "react-dev-utils": "^8.0.0",
+    "react-dev-utils": "^10.0.0",
     "supertest": "^4.0.2"
   },
   "devDependencies": {
-    "babel-jest": "^24.7.1",
-    "cross-env": "^5.2.0",
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/node": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "babel-jest": "^24.9.0",
+    "babel-plugin-module-resolver": "^4.0.0",
     "eslint": "^5.14.1",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-import-resolver-babel-module": "^5.0.1",
-    "eslint-plugin-import": "^2.16.0",
-    "husky": "^1.3.1",
-    "jest": "^24.7.1",
-    "lint-staged": "^8.1.4",
-    "mongodb": "^3.2.3",
-    "nodemon": "^1.18.10",
-    "prettier": "^1.16.4"
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-import-resolver-babel-module": "^5.1.0",
+    "eslint-plugin-import": "^2.19.1",
+    "husky": "^3.1.0",
+    "jest": "^24.9.0",
+    "lint-staged": "^9.5.0",
+    "nodemon": "^2.0.2",
+    "prettier": "^1.19.1",
+    "rimraf": "^3.0.0"
   }
 }
