@@ -262,6 +262,6 @@ Notes: This feature extends to new folders created within either the main or `cl
 
 If you run into any issues, please fill out an issue report <a href="https://github.com/mattcarlotta/fullstack-mern-kit/issues">here</a>.
 
-⚠️ A `react-helmet` dependency (`react-side-effect`) throws a deprecation warning about using `componentWillMount`, see issue tracker <a href="https://github.com/nfl/react-helmet/issues/426">here</a>. The current fix is to force `react-helmet` to use v2.1.0 of `react-side-effect`. See fix <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/client/package.json#L125">here</a>.
+⚠️ (Status: Temporary Fix) - A `react-helmet` dependency (`react-side-effect`) throws a deprecation warning about using `componentWillMount`, see issue tracker <a href="https://github.com/nfl/react-helmet/issues/426">here</a>. The current fix is to force `react-helmet` to use v2.1.0 of `react-side-effect`. See fix <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/client/package.json#L125">here</a>.
 
-😊 Resolved 😊 Hot reloading with `react-toastify` is currently broken (submitted a <a href="https://github.com/fkhadra/react-toastify/issues/357#issuecomment-568145180">PR</a> to fix this issue).
+😊 (Status: Resolved) - Hot reloading with `react-toastify` is currently broken (submitted a <a href="https://github.com/fkhadra/react-toastify/issues/357#issuecomment-568145180">PR</a> to fix this issue).
