@@ -18,8 +18,11 @@
     "initialize": "yarn install && cd client && yarn install && cd ..",
     "start": "NODE_ENV=production node ./build/app.js",
     "server": "NODE_ENV=development nodemon --exec babel-node ./app.js",
+    "staging": "NODE_ENV=stage node ./build/app.js",
+    "stage": "npm run stage --prefix client",
     "client": "npm run dev --prefix client",
     "build": "npm run build --prefix client",
+    "analyze": "npm run analyze --prefix client",
     "lint": "npm run lint:front --silent && npm run lint:back --silent",
     "lint:front": "npm run pre-commit --prefix client",
     "lint:back": "lint-staged",
@@ -63,6 +66,7 @@
     "supertest": "^4.0.2"
   },
   "devDependencies": {
+    "@babel/cli": "^7.7.7",
     "@babel/core": "^7.7.7",
     "@babel/node": "^7.7.7",
     "@babel/preset-env": "^7.7.7",

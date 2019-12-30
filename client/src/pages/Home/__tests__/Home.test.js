@@ -1,9 +1,9 @@
 import Home from "../index";
 
-const wrapper = shallow(<Home />);
+const wrapper = HOCWrap(Home);
 
-describe("Not Found Page", () => {
+describe("Home Page", () => {
 	it("renders without errors", () => {
-		expect(wrapper.find("#home").exists()).toBeTruthy();
+		expect(wrapper.find("Spinner").exists()).toBeTruthy();
 	});
 });

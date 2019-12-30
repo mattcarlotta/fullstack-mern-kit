@@ -1,9 +1,9 @@
 import NotFound from "../index";
 
-const wrapper = HOCWrap(NotFound);
+const wrapper = shallow(<NotFound />);
 
 describe("Not Found Page", () => {
 	it("renders without errors", () => {
-		expect(wrapper.find("Spinner").exists()).toBeTruthy();
+		expect(wrapper.find("#notfound-container").exists()).toBeTruthy();
 	});
 });

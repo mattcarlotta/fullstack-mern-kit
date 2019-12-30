@@ -97,25 +97,30 @@ git clone git@github.com:mattcarlotta/fullstack-mern-kit.git
 
 ## Commands
 
-| `yarn <command>`  | Description                                                                            |
-| ----------------- | -------------------------------------------------------------------------------------- |
-| `dev`             | Starts both servers (client: `localhost:3000`, API: `localhost:5000`).                 |
-| `initialize`      | Installs dependencies for client and API servers.                                      |
-| `start`           | Starts a production server at `localhost:8080` (must run `build` and `compile` first). |
-| `compile`         | Compiles server application to a `build` folder.                                       |
-| `build`           | Compiles client application to a `client/dist` folder.                                 |
-| `checkbuild`      | Checks to see if the `client/dist` folder is ES5 compliant (for IE11).                 |
-| `lint`            | Lints all `.js` files.                                                                 |
-| `lint:back`       | Lints all of API's `.js` files.                                                        |
-| `lint:front`      | Lints all of client's `.js` files.                                                     |
-| `lint:styles`     | Lints all `.scss` files.                                                               |
-| `test`            | Runs `.test.js` files for the client and server.                                       |
-| `test:front`      | Runs `.test.js` files for the client only.                                             |
-| `test:frontcov`   | Runs `.test.js` files for the client with code coverage.                               |
-| `test:frontwatch` | Runs and watches `.test.js` files for the client.                                      |
-| `test:back`       | Runs `.test.js` files for the server only.                                             |
-| `test:backcov`    | Runs `.test.js` files for the server with code coverage.                               |
-| `test:backwatch`  | Runs and watches `.test.js` files for the server.                                      |
+| `yarn <command>`  | Description                                                                               |
+| ----------------- | ----------------------------------------------------------------------------------------- |
+| `dev`             | Starts both servers (client: `localhost:3000`, API: `localhost:5000`).                    |
+| `initialize`      | Installs dependencies for client and API servers.                                         |
+| `start`           | Starts a production server at `localhost:8080` (must run `build` and `compile` first).†   |
+| `compile`         | Compiles server application to a `build` folder.                                          |
+| `build`           | Compiles client application to a `client/dist` folder.                                    |
+| `stage`           | Compiles client application to a `client/dist` folder for staging.                        |
+| `staging`         | Starts a local staging server at `localhost:8080` (must run `stage` and `compile` first). |
+| `analyze`         | Compiles client application to a `client/dist` folder and spawns a distribution chart.    |
+| `checkbuild`      | Checks to see if the `client/dist` folder is ES5 compliant (for IE11).                    |
+| `lint`            | Lints all `.js` files.                                                                    |
+| `lint:back`       | Lints all of API's `.js` files.                                                           |
+| `lint:front`      | Lints all of client's `.js` files.                                                        |
+| `lint:styles`     | Lints all `.scss` files.                                                                  |
+| `test`            | Runs `.test.js` files for the client and server.                                          |
+| `test:front`      | Runs `.test.js` files for the client only.                                                |
+| `test:frontcov`   | Runs `.test.js` files for the client with code coverage.                                  |
+| `test:frontwatch` | Runs and watches `.test.js` files for the client.                                         |
+| `test:back`       | Runs `.test.js` files for the server only.                                                |
+| `test:backcov`    | Runs `.test.js` files for the server with code coverage.                                  |
+| `test:backwatch`  | Runs and watches `.test.js` files for the server.                                         |
+
+† Note: Before running this command, you must edit the <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/updated/client/config/envs.js#L11-L14">client/config/envs.js</a> file and update the `baseUrl` from `https://example.com/api/` to include your remote server address!
 
 ## Example API
 

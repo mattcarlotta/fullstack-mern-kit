@@ -1,6 +1,13 @@
 import React from "react";
-import ShowUsers from "@containers/ShowUsers";
+import DynamicImport from "@components/DynamicImport";
 
-const ShowUsersPage = props => <ShowUsers {...props} />;
+const ShowUsersPage = props => (
+	<DynamicImport
+		{...props}
+		loadFile={() =>
+			import(/*  webpackChunkName: "showusers" */ "@containers/ShowUsers")
+		}
+	/>
+);
 
 export default ShowUsersPage;
