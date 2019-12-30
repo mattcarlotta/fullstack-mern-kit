@@ -229,7 +229,7 @@ Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/cl
 
 ### API
 
-Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/package.json#L47-L81">here</a> to see latest versions.
+Click <a href="https://github.com/mattcarlotta/fullstack-mern-kit/blob/master/package.json#L50-L85">here</a> to see latest versions.
 
 <details>
 <summary>Click to expand brief overview of API packages</summary>
