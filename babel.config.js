@@ -3,20 +3,19 @@ const { resolve } = require("path");
 
 const ignoreFolders = /(\.vscode)|(\client)|(\coverage)|(node_modules)/;
 
-const readDirectory = path =>
-  readdirSync(path).reduce((acc, folder) => {
-    const dirPath = `${path}${folder}`;
-    if (
-      !folder.match(ignoreFolders) &&
-      statSync(resolve(dirPath)).isDirectory()
-    ) {
-      acc[`@${folder.replace(/[^\w\s]/gi, "")}`] = dirPath;
-    }
+const readDirectory = path => readdirSync(path).reduce((acc, folder) => {
+  const dirPath = `${path}${folder}`;
+  if (
+    !folder.match(ignoreFolders)
+      && statSync(resolve(dirPath)).isDirectory()
+  ) {
+    acc[`~${folder.replace(/[^\w\s]/gi, "")}`] = dirPath;
+  }
 
-    return acc;
-  }, {});
+  return acc;
+}, {});
 
-module.exports = function(api) {
+module.exports = function (api) {
   api.cache(true);
 
   return {
@@ -25,18 +24,18 @@ module.exports = function(api) {
         "@babel/preset-env",
         {
           targets: {
-            node: "current"
-          }
-        }
-      ]
+            node: "current",
+          },
+        },
+      ],
     ],
     plugins: [
       [
         "module-resolver",
         {
-          alias: readDirectory("./")
-        }
-      ]
-    ]
+          alias: readDirectory("./"),
+        },
+      ],
+    ],
   };
 };

@@ -1,8 +1,8 @@
 import React from "react";
 import Helmet from "react-helmet";
-import Link from "@components/Link";
-import ExampleIcon from "@components/ExampleIcon";
-import logo from "@images/mernLogo.png";
+import Link from "~components/Link";
+import ExampleIcon from "~components/ExampleIcon";
+import logo from "~images/mernLogo.png";
 import {
 	homeContainer,
 	logoContainer,

@@ -1,10 +1,10 @@
-import User from "@models/user";
-import { getUsers } from "@controllers/user";
+import User from "~models/user";
+import { getUsers } from "~controllers/user";
 import { newUser } from "../../__mocks__/helpers";
 
 const addUser = {
   ...newUser,
-  userName: "exampleuser6"
+  userName: "exampleuser6",
 };
 
 describe("Get Users Controller", () => {
@@ -38,15 +38,15 @@ describe("Get Users Controller", () => {
             state: expect.any(String),
             street: expect.any(String),
             suite: expect.any(String),
-            zipCode: expect.any(String)
+            zipCode: expect.any(String),
           }),
           backgroundInfo: expect.any(String),
           email: expect.any(String),
           firstName: expect.any(String),
           lastName: expect.any(String),
-          userName: expect.any(String)
-        })
-      ])
+          userName: expect.any(String),
+        }),
+      ]),
     });
   });
 });

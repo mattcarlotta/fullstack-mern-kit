@@ -1,12 +1,12 @@
-import { connectDatabase } from "@database";
 import { Types } from "mongoose";
+import { connectDatabase } from "~database";
 
 const mockRequest = (user, session, body, query, params) => ({
   user,
   session,
   body,
   query,
-  params
+  params,
 });
 
 const mockResponse = () => {

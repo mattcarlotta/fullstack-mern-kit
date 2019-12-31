@@ -1,9 +1,9 @@
-import app from "@utils/setup";
-import { seedDatabase } from "@controllers/user";
+import app from "~utils/setup";
+import { seedDatabase } from "~controllers/user";
 
 jest.mock("controllers/user", () => ({
   ...require.requireActual("controllers/user"),
-  seedDatabase: jest.fn((req, res, done) => done())
+  seedDatabase: jest.fn((req, res, done) => done()),
 }));
 
 describe("Seed Database Route", () => {

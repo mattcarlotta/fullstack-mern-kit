@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import FieldError from "@components/FieldError";
+import FieldError from "~components/FieldError";
 import {
 	hasFieldError,
 	inputContainer,

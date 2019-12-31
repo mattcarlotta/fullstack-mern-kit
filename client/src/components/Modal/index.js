@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { FaTimes } from "react-icons/fa";
-import Flex from "@components/Flex";
-import FlexEnd from "@components/FlexEnd";
-import FlexStart from "@components/FlexStart";
+import Flex from "~components/Flex";
+import FlexEnd from "~components/FlexEnd";
+import FlexStart from "~components/FlexStart";
 import BackgroundOverlay from "./BackgroundOverlay";
 import Center from "./Center";
 import CloseModalButton from "./CloseModalButton";

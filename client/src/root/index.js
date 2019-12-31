@@ -5,9 +5,9 @@ import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
 import { createBrowserHistory } from "history";
 import createSagaMiddleware from "redux-saga";
-import createRootReducer from "@reducers";
-import Routes from "@routes";
-import rootSagas from "@sagas";
+import createRootReducer from "~reducers";
+import Routes from "~routes";
+import rootSagas from "~sagas";
 
 export const saga = createSagaMiddleware();
 const history = createBrowserHistory();

@@ -1,9 +1,9 @@
-import app from "@utils/setup";
-import { updateUser } from "@controllers/user";
+import app from "~utils/setup";
+import { updateUser } from "~controllers/user";
 
 jest.mock("controllers/user", () => ({
   ...require.requireActual("controllers/user"),
-  updateUser: jest.fn((req, res, done) => done())
+  updateUser: jest.fn((req, res, done) => done()),
 }));
 
 describe("Update A User Route", () => {

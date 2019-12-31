@@ -1,4 +1,4 @@
-import * as types from "@types";
+import * as types from "~types";
 
 export const initialState = {
 	error: "",
@@ -6,10 +6,10 @@ export const initialState = {
 };
 
 /**
- * @function serverReducer
- * @param {object} state - an object containing error or server messages.
- * @param {object} action - type and payload to be reduced.
- * @returns {object} - new server state.
+ * ~function serverReducer
+ * ~param {object} state - an object containing error or server messages.
+ * ~param {object} action - type and payload to be reduced.
+ * ~returns {object} - new server state.
  */
 const serverReducer = (state = initialState, { payload, type }) => {
 	switch (type) {

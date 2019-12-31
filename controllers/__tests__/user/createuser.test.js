@@ -1,15 +1,15 @@
-import User from "@models/user";
-import { createUser } from "@controllers/user";
+import User from "~models/user";
+import { createUser } from "~controllers/user";
 import { newUser } from "../../__mocks__/helpers";
 
 const addUser = {
   ...newUser,
-  userName: "exampleuser4"
+  userName: "exampleuser4",
 };
 
 const addUser2 = {
   ...newUser,
-  userName: "duplicateuser"
+  userName: "duplicateuser",
 };
 
 const emptybody = {
@@ -18,7 +18,7 @@ const emptybody = {
   lastName: "",
   userName: "",
   backgroundInfo: "",
-  address: {}
+  address: {},
 };
 
 describe("Create User Controller", () => {
@@ -43,7 +43,7 @@ describe("Create User Controller", () => {
     await createUser(req, res);
     expect(res.status).toHaveBeenCalledWith(400);
     expect(res.json).toHaveBeenCalledWith({
-      err: "Missing user card creation parameters."
+      err: "Missing user card creation parameters.",
     });
   });
 
@@ -54,7 +54,7 @@ describe("Create User Controller", () => {
 
     expect(res.status).toHaveBeenCalledWith(201);
     expect(res.json).toHaveBeenCalledWith({
-      message: `Successfully created ${req.body.userName}.`
+      message: `Successfully created ${req.body.userName}.`,
     });
   });
 
@@ -65,7 +65,7 @@ describe("Create User Controller", () => {
 
     expect(res.status).toHaveBeenCalledWith(400);
     expect(res.json).toHaveBeenCalledWith({
-      err: "Error: That username is already in use!"
+      err: "Error: That username is already in use!",
     });
   });
 });

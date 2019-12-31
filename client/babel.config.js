@@ -5,7 +5,7 @@ const readDirectory = path =>
 	readdirSync(path).reduce((acc, folder) => {
 		const dirPath = `${path}/${folder}`;
 		if (statSync(resolve(dirPath)).isDirectory()) {
-			acc[`@${folder.replace(/[^\w\s]/gi, "")}`] = dirPath;
+			acc[`~${folder.replace(/[^\w\s]/gi, "")}`] = dirPath;
 		}
 
 		return acc;

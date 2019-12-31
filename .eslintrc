@@ -5,6 +5,7 @@
   },
   "root": true,
   "rules": {
+    "no-throw-literal": 0,
     "consistent-return": 0,
     "global-require": 0,
     "max-len": 0,
@@ -26,15 +27,15 @@
     "import/resolver": {
       "babel-module": {
         "alias": {
-          "@controllers": "./controllers",
-          "@database": "./database",
-          "@env": "./env",
-          "@models": "./models",
-          "@middlewares": "./middlewares",
-          "@routes": "./routes",
-          "@seeds": "./seeds",
-          "@server": "./server",
-          "@utils": "./utils"
+          "~controllers": "./controllers",
+          "~database": "./database",
+          "~env": "./env",
+          "~models": "./models",
+          "~middlewares": "./middlewares",
+          "~routes": "./routes",
+          "~seeds": "./seeds",
+          "~server": "./server",
+          "~utils": "./utils"
         }
       }
     }

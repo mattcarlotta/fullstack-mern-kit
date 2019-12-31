@@ -1,7 +1,7 @@
 import isEmpty from "lodash/isEmpty";
-import User from "@models/user";
-import { sendError } from "@utils/helpers";
-import seeds from "@seeds/data";
+import User from "~models/user";
+import { sendError } from "~utils/helpers";
+import seeds from "~seeds/data";
 
 const createUser = async (req, res) => {
   try {
@@ -11,18 +11,17 @@ const createUser = async (req, res) => {
       lastName,
       userName,
       backgroundInfo,
-      address
+      address,
     } = req.body;
 
     if (
-      !email ||
-      !firstName ||
-      !lastName ||
-      !userName ||
-      !backgroundInfo ||
-      isEmpty(address)
-    )
-      throw "Missing user card creation parameters.";
+      !email
+      || !firstName
+      || !lastName
+      || !userName
+      || !backgroundInfo
+      || isEmpty(address)
+    ) throw "Missing user card creation parameters.";
 
     const userNameTaken = await User.findOne({ userName });
     if (userNameTaken) throw "Error: That username is already in use!";
@@ -94,4 +93,6 @@ const updateUser = async (req, res) => {
   }
 };
 
-export { createUser, deleteUser, getUsers, seedDatabase, updateUser };
+export {
+  createUser, deleteUser, getUsers, seedDatabase, updateUser,
+};

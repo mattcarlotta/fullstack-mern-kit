@@ -2,19 +2,19 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Helmet from "react-helmet";
 import { connect } from "react-redux";
-import LoadingUsers from "@components/LoadingUsers";
-import DisplayUserList from "@components/DisplayUserList";
-import UserListNavigation from "@components/UserListNavigation";
-import Modal from "@components/Modal";
-import UserForm from "@containers/UserForm";
+import LoadingUsers from "~components/LoadingUsers";
+import DisplayUserList from "~components/DisplayUserList";
+import UserListNavigation from "~components/UserListNavigation";
+import Modal from "~components/Modal";
+import UserForm from "~containers/UserForm";
 import {
 	createUser,
 	deleteUser,
 	fetchUsers,
 	seedDB,
 	updateUser,
-} from "@actions/Users";
-import { resetMessage } from "@actions/Server";
+} from "~actions/Users";
+import { resetMessage } from "~actions/Server";
 import { preventScroll, usersContainer } from "./ShowUsers.module.scss";
 
 export class ShowUsers extends Component {

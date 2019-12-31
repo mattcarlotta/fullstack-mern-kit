@@ -3,11 +3,11 @@ import { Route, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Helmet from "react-helmet";
 
-import Home from "@pages/Home";
-import NotFound from "@pages/NotFound";
-import ShowUsers from "@pages/ShowUsers";
-import Toast from "@components/Toast";
-import GlobalStylesheet from "@styles/globalStylesheet";
+import Home from "~pages/Home";
+import NotFound from "~pages/NotFound";
+import ShowUsers from "~pages/ShowUsers";
+import Toast from "~components/Toast";
+import GlobalStylesheet from "~styles/globalStylesheet";
 
 const config = {
 	htmlAttributes: { lang: "en" },

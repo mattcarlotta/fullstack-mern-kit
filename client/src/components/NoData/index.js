@@ -1,6 +1,6 @@
 import React from "react";
 import { FaChartArea } from "react-icons/fa";
-import Container from "@components/Container";
+import Container from "~components/Container";
 import { noDataMessage } from "./NoData.module.scss";
 
 const NoData = () => (

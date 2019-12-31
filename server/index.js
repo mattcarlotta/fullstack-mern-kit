@@ -2,7 +2,7 @@
 import { resolve } from "path";
 import express from "express";
 import openBrowser from "react-dev-utils/openBrowser";
-import { currentDirectory } from "@utils/helpers";
+import { currentDirectory } from "~utils/helpers";
 
 const {
   APIPORT, HOST, inProduction, inStaging,

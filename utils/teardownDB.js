@@ -1,18 +1,18 @@
 /* eslint-disable */
-import { connectDatabase } from "@database";
+import { connectDatabase } from "~database";
 
 const { DROPDB } = process.env;
 
 /**
  * Function to tear down the testing Mongo database.
  *
- * @function
- * @async
- * @function connectDatabase - connects to testing Mongo database.
- * @function dropDatabase - drops testing Mongo database.
- * @function close - closes connection to testing Mongo database.
- * @returns {string} - displays a:  PASS  utils/teardownDB.js message to console.
- * @throws {error} - displays a:  FAIL  utils/teardownDB.js message to console with the error.
+ * ~function
+ * ~async
+ * ~function connectDatabase - connects to testing Mongo database.
+ * ~function dropDatabase - drops testing Mongo database.
+ * ~function close - closes connection to testing Mongo database.
+ * ~returns {string} - displays a:  PASS  utils/teardownDB.js message to console.
+ * ~throws {error} - displays a:  FAIL  utils/teardownDB.js message to console with the error.
  */
 
 const teardownDB = async () => {

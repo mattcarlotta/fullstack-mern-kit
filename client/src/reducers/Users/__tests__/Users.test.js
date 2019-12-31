@@ -1,4 +1,4 @@
-import * as types from "@types";
+import * as types from "~types";
 import userReducer, { initialState } from "../index";
 
 const users = [
@@ -11,7 +11,7 @@ const users = [
 			zipCode: "55555",
 		},
 		backgroundInfo: "Hi.",
-		email: "test@test.com",
+		email: "test~test.com",
 		firstName: "Bob",
 		lastName: "Dole",
 		userName: "bobdole",

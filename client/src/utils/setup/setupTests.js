@@ -1,8 +1,8 @@
 import { JSDOM } from "jsdom";
 import { configure, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import { HOCWrap, shallowWrap } from "@utils/testing";
-import mockApp from "@utils/__mocks__/mockAxios.js";
+import { HOCWrap, shallowWrap } from "~utils/testing";
+import mockApp from "~utils/__mocks__/mockAxios.js";
 import "jest-styled-components";
 
 configure({ adapter: new Adapter() });

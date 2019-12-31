@@ -1,8 +1,8 @@
-import "@env";
+import "~env";
 import express from "express";
-import middlewares from "@middlewares";
-import routes from "@routes";
-import server from "@server";
+import middlewares from "~middlewares";
+import routes from "~routes";
+import server from "~server";
 
 const app = express();
 

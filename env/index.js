@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { currentDirectory } from "@utils/helpers";
+import { currentDirectory } from "~utils/helpers";
 
 const { NODE_ENV } = process.env;
 
