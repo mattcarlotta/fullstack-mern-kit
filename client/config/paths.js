@@ -26,7 +26,7 @@ module.exports = {
 	globalCSS: resolve(`${currentDirectory}/src/styles/globals`),
 	/* path to required ant design icons */
 	icons: resolve(`${currentDirectory}/src/utils/icons/index.js`),
-	/* compiled fonts build path (build/media) */
+	/* compiled images build path (build/media) */
 	imagesFolder: "media",
 	/* compiled fonts build path (build/assets) */
 	fontsFolder: "assets",
