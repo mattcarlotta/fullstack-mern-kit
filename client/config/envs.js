@@ -15,7 +15,7 @@ const baseURL =
 
 module.exports = {
 	/*  boolean to use bundle analyzer */
-	analzye: ANALZYER,
+	analyze: ANALZYER,
 	/* current API port */
 	APIPORT,
 	/* current API base URL */

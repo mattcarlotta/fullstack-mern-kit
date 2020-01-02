@@ -15,7 +15,7 @@ const ManifestPlugin = require("webpack-manifest-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const { cssFolder, faviconPath, publicPath, templatePath } = require("./paths");
 const {
-	analzye,
+	analyze,
 	APIPORT,
 	baseURL,
 	inDevelopment,
@@ -112,7 +112,7 @@ if (inDevelopment) {
 			{ from: "public/logo_192.png" },
 		]),
 		/* runs bundle analyzer if in staging */
-		analzye && inStaging && new BundleAnalyzerPlugin(),
+		analyze && inStaging && new BundleAnalyzerPlugin(),
 	);
 }
 
